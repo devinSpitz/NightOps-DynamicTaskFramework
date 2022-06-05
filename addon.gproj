@@ -1,0 +1,8 @@
+GameProject {
+ ID "NightOpsDynamicTaskFramework"
+ GUID "598ABCE21D6DE27D"
+ TITLE "NightOps-DynamicTaskFramework"
+ Dependencies {
+  "58D0FB3206B6F859"
+ }
+}
