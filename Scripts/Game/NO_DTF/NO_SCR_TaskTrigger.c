@@ -25,6 +25,7 @@ class NO_SCR_TaskTrigger : SCR_BaseTriggerEntity
 	private IEntity Parent;
 	private NO_SCR_EditorTask ParentTask;
 	private bool alreadyTriggered = false;
+	private bool TriggeredWith = false;
 	private NO_SCR_TaskManager manager;
 	//Thanks to Herbiie for his code and the wiki: https://github.com/Herbiie/ArmAReforgerMissionMakingGuide
     // Set up the filter
@@ -138,20 +139,13 @@ class NO_SCR_TaskTrigger : SCR_BaseTriggerEntity
 		
 		if(m_tTriggerType==TriggerType.Assign)
 		{
-			if(ParentTask.m_eTaskType==TaskType.Faction)
+
+			manager.SetTaskFaction(ParentTask,game.GetFactionManager().GetFactionByKey(ParentTask.m_faction));
+			foreach(int playerId  : players)
 			{
-				manager.SetTaskFaction(ParentTask,game.GetFactionManager().GetFactionByKey(ParentTask.m_faction));
+				auto taskExecutor = SCR_BaseTaskExecutor.GetTaskExecutorByID(playerId);
+				manager.AssignTask(ParentTask,taskExecutor,true);
 			}
-			else
-			{
-				foreach(int playerId  : players)
-				{
-					auto taskExecutor = SCR_BaseTaskExecutor.GetTaskExecutorByID(playerId);
-					manager.AssignTask(ParentTask,taskExecutor,true);
-				}
-			}
-			
-			
 		}
 		else if(m_tTriggerType==TriggerType.Fail)
 		{
@@ -164,18 +158,19 @@ class NO_SCR_TaskTrigger : SCR_BaseTriggerEntity
 		else if(m_tTriggerType==TriggerType.Create)
 		{
 			
-			//if(ParentTask.m_eTaskType==TaskType.Faction)
-			//{
-			//	manager.SetTaskFaction(ParentTask,game.GetFactionManager().GetFactionByKey(ParentTask.m_faction));
-			//}
-			//else
-			//{
-				manager.OnTaskCreated(ParentTask);
-			//}
+			manager.SetTaskFaction(ParentTask,game.GetFactionManager().GetFactionByKey(ParentTask.m_faction));
 		}
 		
+		array<SCR_BaseTask> tasks = {};
+		manager.GetTasks(tasks);
+		foreach(SCR_BaseTask single : tasks)
+		{
+			Print(single.GetTitle());
+		}
 		
 		alreadyTriggered = true;
 	}
- 
+
+	
+	
 }

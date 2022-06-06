@@ -26,5 +26,20 @@ class NO_SCR_TaskManager : SCR_BaseTaskManager
 		}
 	}
 	
+		
+ 	////////////////////////////////////////////////////////////////
+	///// CALLED ON EVERY MACHINE FOR EVERY PLAYER REGISTERED //////
+	// INCLUDING WHEN JIP, PREVIOUS REGISTERED PLAYERS ARE CALLED //
+	////////////////////////////////////////////////////////////////
+	protected override void OnPlayerRegistered(int registeredPlayerID)
+	{
+		super.OnPlayerRegistered(registeredPlayerID);
+
+		// Reset faction on initial tasks for JIP (Authority only)
+		//ToDO Implement cache and rplProp
+		//if (m_pRplComponent.IsMaster())
+		//	SetInitialTasksFaction();
+	}
+	
 	
 }

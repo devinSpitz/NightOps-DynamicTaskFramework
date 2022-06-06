@@ -231,8 +231,11 @@ SCR_BaseGameMode GameMode_Plain1 {
   SCR_HintManagerComponent "{598C5DF0226D0E90}" {
   }
   SCR_NametagConfigComponent "{598C5DF0226D0E9E}" {
+   m_sConfigPath "{09F7AAA14A642683}Configs/NameTags/NametagFriendlies.conf"
   }
   SCR_NotificationSenderComponent "{598C5DF0226D0E9D}" {
+   m_iKillFeedType FULL
+   m_iReceiveKillFeedType ALL
   }
   SCR_PlayerProfileManagerComponent "{598C5DF0226D0E9A}" {
   }
@@ -319,15 +322,20 @@ NO_SCR_TaskManager TaskManager : "{2DF590FC1A531940}Prefabs/NO_DTF/TaskManager.e
   }
  }
  coords 97.49 9.931 149.439
+ m_aSupportedTaskTypes {
+  SCR_BaseTaskSupportClass "{598C9480494F6CEF}" {
+   m_TaskPrefab "{1D0F815858EE24AC}Prefabs/Tasks/BaseTask.et"
+  }
+  SCR_TriggerTaskSupportClass "{598C948370715277}" {
+   m_TaskPrefab "{A7E92298A3F916F7}Prefabs/Tasks/CampaignTask.et"
+  }
+  SCR_MoveTaskSupportClass "{598C948358E18628}" {
+   m_TaskPrefab "{1D0F815858EE24AC}Prefabs/Tasks/BaseTask.et"
+  }
+ }
  {
   NO_SCR_EditorTask : "{711972F6DA218682}Prefabs/NO_DTF/Task.et" {
    coords 0 0 0
-   m_sName "Kill specific enemy"
-   m_sMapIconName "Icon_Task_Move"
-   m_sTaskListIconName "Icon_Task_Move"
-   m_bNotifyAssignment 1
-   m_bNotifyUnassign 1
-   m_TextType CUSTOM
    {
     $grp NO_SCR_TaskTrigger {
      {
@@ -344,7 +352,6 @@ NO_SCR_TaskManager TaskManager : "{2DF590FC1A531940}Prefabs/NO_DTF/TaskManager.e
       TriggerActivationType "All changes"
       PeriodicQueries 1
       m_tTriggerType Create
-      m_eActivateType Enter
      }
      {
       components {

@@ -7,4 +7,11 @@ NO_SCR_EditorTask {
   }
  }
  coords -2.898 0 -2.801
+ m_sName "Kill specific enemy"
+ m_sMapIconName "Icon_Task_Move"
+ m_sTaskListIconName "Icon_Task_Move"
+ m_bNotifyAssignment 1
+ m_bNotifyUnassign 1
+ m_TextType MOVE
+ m_iTaskCompletionType ALWAYS_MANUAL
 }
