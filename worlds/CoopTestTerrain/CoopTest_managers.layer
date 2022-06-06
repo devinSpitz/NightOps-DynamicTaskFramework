@@ -245,6 +245,7 @@ SCR_BaseGameMode GameMode_Plain1 {
   SCR_RespawnSystemComponent "{598C5DF0226D0E81}" {
   }
   SCR_RespawnTimerComponent "{598C5DF02DCE40A7}" {
+   m_fRespawnTime 3
   }
   SCR_SaveLoadComponent "{598C5DF0226D0E8C}" {
   }
@@ -320,7 +321,7 @@ NO_SCR_TaskManager TaskManager : "{2DF590FC1A531940}Prefabs/NO_DTF/TaskManager.e
  coords 97.49 9.931 149.439
  {
   NO_SCR_EditorTask : "{711972F6DA218682}Prefabs/NO_DTF/Task.et" {
-   coords -1.653 0.07 -4.556
+   coords 0 0 0
    m_sName "Kill specific enemy"
    m_sMapIconName "Icon_Task_Move"
    m_sTaskListIconName "Icon_Task_Move"
