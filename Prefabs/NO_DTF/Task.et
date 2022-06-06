@@ -1,0 +1,10 @@
+NO_SCR_EditorTask {
+ ID "598AE9D4A45C5251"
+ components {
+  Hierarchy "{598AE9D446B8035A}" {
+  }
+  RplComponent "{598AE9D4491FD4C6}" {
+  }
+ }
+ coords -2.898 0 -2.801
+}
