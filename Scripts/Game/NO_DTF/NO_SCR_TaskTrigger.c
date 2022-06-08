@@ -101,15 +101,6 @@ class NO_SCR_TaskTrigger : SCR_BaseTriggerEntity
 		if(m_eActivateType == ActivateType.Enter && !enter) return;
 		if(m_eActivateType == ActivateType.Leave && enter) return;
 		
-		ArmaReforgerScripted game = GetGame();
-		if(!game) return;
-		
-		PlayerManager playerManager = game.GetPlayerManager();
-		if(!playerManager) return;
-		
-		array<int> players = {};
-		playerManager.GetAllPlayers(players);
-		
 		if(m_eWhenTypeTrigger == WhenTypeTrigger.All)
 		{
 			if(players.Count()!=playerInTrigger.Count()) return;
@@ -136,27 +127,7 @@ class NO_SCR_TaskTrigger : SCR_BaseTriggerEntity
 		}
 		
 		
-		if(m_tTriggerType==TriggerType.Assign)
-		{
-			foreach(int playerId  : players)
-			{
-				auto taskExecutor = SCR_BaseTaskExecutor.GetTaskExecutorByID(playerId);
-				manager.AssignTask(ParentTask,taskExecutor,true);
-			}
-		}
-		else if(m_tTriggerType==TriggerType.Fail)
-		{
-			manager.FailTask(ParentTask);
-		}
-		else if(m_tTriggerType==TriggerType.Finish)
-		{
-			manager.FinishTask(ParentTask);
-		}
-		else if(m_tTriggerType==TriggerType.Create)
-		{
-			manager.SetTaskFaction(ParentTask,game.GetFactionManager().GetFactionByKey(ParentTask.m_faction));
-		}
-		
+		ParentTask.ChangeStateOfTask(m_tTriggerType);
 		
 		alreadyTriggered = true;
 	}
