@@ -135,7 +135,6 @@ class NO_SCR_TaskTrigger : SCR_BaseTriggerEntity
 			if(playerInTrigger.Count()<=0) return;
 		}
 		
-	
 		
 		if(m_tTriggerType==TriggerType.Assign)
 		{
@@ -158,12 +157,6 @@ class NO_SCR_TaskTrigger : SCR_BaseTriggerEntity
 			manager.SetTaskFaction(ParentTask,game.GetFactionManager().GetFactionByKey(ParentTask.m_faction));
 		}
 		
-		array<SCR_BaseTask> tasks = {};
-		manager.GetTasks(tasks);
-		foreach(SCR_BaseTask single : tasks)
-		{
-			Print(single.GetTitle());
-		}
 		
 		alreadyTriggered = true;
 	}
