@@ -139,8 +139,6 @@ class NO_SCR_TaskTrigger : SCR_BaseTriggerEntity
 		
 		if(m_tTriggerType==TriggerType.Assign)
 		{
-
-			manager.SetTaskFaction(ParentTask,game.GetFactionManager().GetFactionByKey(ParentTask.m_faction));
 			foreach(int playerId  : players)
 			{
 				auto taskExecutor = SCR_BaseTaskExecutor.GetTaskExecutorByID(playerId);
@@ -157,7 +155,6 @@ class NO_SCR_TaskTrigger : SCR_BaseTriggerEntity
 		}
 		else if(m_tTriggerType==TriggerType.Create)
 		{
-			
 			manager.SetTaskFaction(ParentTask,game.GetFactionManager().GetFactionByKey(ParentTask.m_faction));
 		}
 		

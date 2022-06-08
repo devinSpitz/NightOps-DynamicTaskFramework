@@ -1,0 +1,38 @@
+$grp CommentEntity {
+ Comment4 {
+  coords 57.069 11.172 303.503
+  m_Comment "Fail Task"
+  m_Size 0.5
+  m_Color 0.251 0.502 0
+  m_FaceCamera 1
+  m_VisibleOverall 1
+  m_VisibleIngame 1
+ }
+ Comment3 {
+  coords 87.793 11.172 287.811
+  m_Comment "Complete Task"
+  m_Size 0.5
+  m_Color 0.251 0.502 0
+  m_FaceCamera 1
+  m_VisibleOverall 1
+  m_VisibleIngame 1
+ }
+ Comment2 {
+  coords 69.992 11.172 258.445
+  m_Comment "Assign Task"
+  m_Size 0.5
+  m_Color 0.251 0.502 0
+  m_FaceCamera 1
+  m_VisibleOverall 1
+  m_VisibleIngame 1
+ }
+ Comment1 {
+  coords 65.458 11.172 228.053
+  m_Comment "Create Task"
+  m_Size 0.5
+  m_Color 0.251 0.502 0
+  m_FaceCamera 1
+  m_VisibleOverall 1
+  m_VisibleIngame 1
+ }
+}

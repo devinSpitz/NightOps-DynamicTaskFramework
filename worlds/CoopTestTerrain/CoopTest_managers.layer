@@ -300,6 +300,7 @@ SCR_FactionManager FactionManager_USxUSSR1 : "{589540B35EBA8CDC}Prefabs/MP/Manag
    m_bIsPlayable 0
   }
  }
+ m_bCanChangeFactionsPlayable 0
 }
 TimeAndWeatherManagerEntity TimeAndWeatherManager : "{A3BAF78F6F03315B}Prefabs/World/Game/TimeAndWeatherManager.et" {
  coords 114.399 0 106.482

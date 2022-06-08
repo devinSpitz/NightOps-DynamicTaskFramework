@@ -1,15 +1,12 @@
 Layer default {
  Index 0
 }
-Layer managers {
+Layer Amanagers {
  Index 1
 }
-Layer ExampleLayer {
+Layer SpawnPoints {
  Index 4
 }
 Layer environment {
  Index 3
-}
-Layer comments {
- Index 6
 }
