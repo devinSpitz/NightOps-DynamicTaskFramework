@@ -138,7 +138,7 @@ class NO_SCR_TaskNamedObjectTriggerComponent : ScriptComponent
 			}
 			Reset();
 		}
-		else if(m_eWhenTypeTrigger == WhenTypeTriggerNamed.OnlyAiOnDeath || m_eWhenTypeTrigger == WhenTypeTriggerNamed.Disappear )
+		else if(m_eWhenTypeTrigger == WhenTypeTriggerNamed.DisappearOrDie )
 		{
 			if(!InTrigger && !wasAlive)
 			{

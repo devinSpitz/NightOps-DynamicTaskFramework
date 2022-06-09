@@ -82,13 +82,175 @@ EnvironmentProbeEntity MainProbe {
  BottomAngleMax -5
  BottomAngleMin 0
 }
+SCR_AIGroup Ai {
+ components {
+  AIBehaviorTreeComponent "{5993150454A3AF95}" {
+   BehaviorTree "{082D5B0D5D33DB1D}AI/BehaviorTrees/Chimera/Group/Group.bt"
+  }
+  AIFormationComponent "{5993150454A3AFA5}" {
+   DefaultFormation "Wedge"
+   "Min Distance to Raytrace an Offset" 1
+  }
+  AIGroupMovementComponent "{5993150454A3AFBC}" {
+  }
+  AIGroupSteeringComponent "{5993150454A3AFB1}" {
+   "Using Railroad" 0
+  }
+  AIPathfindingComponent "{5993150454A3AFCC}" {
+   NavmeshProject "Soldiers"
+  }
+  NO_SCR_DTFRenamerComponent "{5993150457C11C59}" {
+   m_sNewName "Team1"
+  }
+  SCR_AIConfigComponent "{5993150454A3AF25}" {
+   m_aDefaultReactions {
+    SCR_AIIdleReaction "{5993150454A3AFEF}" {
+    }
+   }
+   m_aGoalReactions {
+    SCR_AIGoalReaction_Attack "{5993150454A3AFE7}" {
+     m_eType ATTACK
+    }
+    SCR_AIGoalReaction_GetInVehicle "{5993150454A3AFFC}" {
+     m_eType GET_IN_VEHICLE
+    }
+    SCR_AIGoalReaction_GetOutVehicle "{5993150454A3AFF0}" {
+     m_eType GET_OUT_VEHICLE
+    }
+    SCR_AIGoalReaction_Heal "{5993150454A3AFF4}" {
+     m_eType HEAL
+    }
+    SCR_AIGoalReaction_Defend "{5993150454A3AF0A}" {
+     m_eType DEFEND
+    }
+    SCR_AIGoalReaction_Move "{5993150454A3AF0E}" {
+     m_eType MOVE
+    }
+    SCR_AIGoalReaction_SeekAndDestroy "{5993150454A3AF02}" {
+     m_eType SEEK_DESTROY
+    }
+    SCR_AIGoalReaction_PerformAction "{5993150454A3AF06}" {
+     m_eType PERFORM_ACTION
+    }
+    SCR_AIGoalReaction_Cancel "{5993150454A3AF1A}" {
+     m_eType CANCEL
+    }
+    SCR_AIGoalReaction_Follow "{5993150454A3AF1D}" {
+     m_eType FOLLOW
+    }
+   }
+   m_aInfoReactions {
+    SCR_AIInfoReaction_Contact "{5993150454A3AF11}" {
+     m_eType CONTACT
+    }
+    SCR_AIInfoReaction_TargetEliminated "{5993150454A3AF15}" {
+     m_eType TARGET_ELIMINATED
+    }
+    SCR_AIInfoReaction_Wounded "{5993150454A3AF28}" {
+     m_eType WOUNDED
+    }
+    SCR_AIInfoReaction_TargetLost "{5993150454A3AF2C}" {
+     m_eType TARGET_LOST
+    }
+    SCR_AIInfoReaction_NoAmmo "{5993150454A3AF23}" {
+     m_eType NO_AMMO
+    }
+   }
+  }
+  SCR_AIGroupInfoComponent "{5993150454A3AF38}" {
+  }
+  SCR_AIGroupUtilityComponent "{5993150454A3AF3A}" {
+  }
+  SCR_CallsignGroupComponent "{5993150454A3AF3C}" {
+  }
+  SCR_EditableGroupComponent "{5993150454A3A83F}" {
+   m_EntityType GROUP
+   m_UIInfo SCR_EditableGroupUIInfo "{5993150454A3A8EF}" {
+    Name "(Group_US_SentryTeam)"
+    m_Image "{090653AF2A3B3E89}UI/Textures/EditorPreviews/Groups/BLUFOR/Group_US_SentryTeam.edds"
+    m_sFaction "US"
+    m_aAuthoredLabels {
+     4 11
+    }
+    m_aAutoLabels {
+     70
+    }
+    m_EntityChildrenBudgetCost {
+     SCR_EntityBudgetValue "{5993150454A3AF61}" {
+      m_BudgetType AI
+      m_Value 2
+     }
+    }
+    m_MilitarySymbol SCR_MilitarySymbol "{5993150454A3AF7B}" {
+     m_Identity BLUFOR
+     m_Dimension LAND
+     m_Icons 32769
+     m_Amplifier TEAM
+    }
+   }
+   m_bAutoRegister ALWAYS
+   m_vIconPos 0 5 0
+   m_Flags 9541
+  }
+  SCR_GroupIdentityComponent "{5993150454A3A850}" {
+   m_MilitarySymbol SCR_MilitarySymbol "{5993150454A3A85B}" {
+    m_Identity BLUFOR
+    m_Icons 32769
+    m_Amplifier TEAM
+   }
+  }
+  SCR_MailboxComponent "{5993150454A3A854}" {
+  }
+  SCR_PreviewEntityComponent "{5993150454A3A877}" {
+   m_bRuntime 0
+   m_aEntries {
+    SCR_BasePreviewEntry "{5993150454A3A866}" {
+     m_iParentID -1
+     m_Mesh ""
+     m_Flags 3
+     m_Shape MESH
+     m_iPivotID ""
+     m_fScale 1
+     m_vPosition 0 0 0
+     m_vAngles 0 0 0
+    }
+    SCR_BasePreviewEntry "{5993150454A3A87D}" {
+     m_iParentID 0
+     m_Mesh "{7B2420C8BC72373A}Prefabs/Characters/Core/Character_Base_Preview.et"
+     m_Flags 0
+     m_Shape PREFAB
+     m_iPivotID ""
+     m_fScale 1
+     m_vPosition 0 0 0
+     m_vAngles 0 0 0
+    }
+    SCR_BasePreviewEntry "{5993150454A3A873}" {
+     m_iParentID 0
+     m_Mesh "{7B2420C8BC72373A}Prefabs/Characters/Core/Character_Base_Preview.et"
+     m_Flags 0
+     m_Shape PREFAB
+     m_iPivotID ""
+     m_fScale 1
+     m_vPosition 3 0 -3
+     m_vAngles 0 0 0
+    }
+   }
+  }
+  RplComponent "{5993150454A3A98F}" {
+   Streamable Disabled
+  }
+ }
+ coords 129.535 10.001 274.087
+ DangerEventRange 200
+ m_faction "US"
+ m_aUnitPrefabSlots {
+  "{26A9756790131354}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_US_Rifleman.et" "{26A9756790131354}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_US_Rifleman.et"
+ }
+}
 SCR_WaterZoneEntity OceanWaterZone {
  coords 2162.399 2 2154.482
  m_Width 6000
  m_Length 6000
  m_Depth 500
  m_IsOcean 1
-}
-SCR_AIGroup Team1 : "{3BF36BDEEB33AEC9}Prefabs/Groups/BLUFOR/Group_US_SentryTeam.et" {
- coords 129.535 10.001 274.087
 }
