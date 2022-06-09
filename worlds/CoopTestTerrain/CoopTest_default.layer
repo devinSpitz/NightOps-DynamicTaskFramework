@@ -89,3 +89,6 @@ SCR_WaterZoneEntity OceanWaterZone {
  m_Depth 500
  m_IsOcean 1
 }
+SCR_AIGroup Team1 : "{3BF36BDEEB33AEC9}Prefabs/Groups/BLUFOR/Group_US_SentryTeam.et" {
+ coords 129.535 10.001 274.087
+}

@@ -20,6 +20,12 @@ class NO_SCR_DtfStatics
 	
 }
 
+enum WhenTypeTriggerNamed
+{
+	Appear,
+	Disappear,
+	OnlyAiOnDeath
+};
 
 enum WhenTypeTrigger
 {

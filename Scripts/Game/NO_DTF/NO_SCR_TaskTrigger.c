@@ -101,6 +101,13 @@ class NO_SCR_TaskTrigger : SCR_BaseTriggerEntity
 		if(m_eActivateType == ActivateType.Enter && !enter) return;
 		if(m_eActivateType == ActivateType.Leave && enter) return;
 		
+		
+		ArmaReforgerScripted game = GetGame();
+		if(!game) return;
+		
+		PlayerManager playerManager = game.GetPlayerManager();
+		array<int> players = {};
+		playerManager.GetAllPlayers(players);
 		if(m_eWhenTypeTrigger == WhenTypeTrigger.All)
 		{
 			if(players.Count()!=playerInTrigger.Count()) return;

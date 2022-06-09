@@ -355,6 +355,19 @@ NO_SCR_TaskManager TaskManager : "{2DF590FC1A531940}Prefabs/NO_DTF/TaskManager.e
   NO_SCR_EditorTask : "{711972F6DA218682}Prefabs/NO_DTF/Task.et" {
    coords 0 0 0
    {
+    GenericEntity {
+     components {
+      Hierarchy "{599315039C504086}" {
+      }
+      NO_SCR_TaskNamedObjectTriggerComponent "{59931502C6BCDA66}" {
+       m_tTriggerType Finish
+       m_sTriggerNamedObject "Team1"
+      }
+      RplComponent "{5993150399A2AE1B}" {
+      }
+     }
+     coords -70.245 0.07 97.838
+    }
     $grp NO_SCR_TaskTrigger {
      {
       components {

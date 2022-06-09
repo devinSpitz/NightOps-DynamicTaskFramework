@@ -19,11 +19,8 @@ class NO_SCR_EditorTask : SCR_EditorTask
 		
 		if(!m_pRplComponent.IsMaster()) return;
 				
-		IEntity Parent = GetParent();
-		if(!Parent) Debug.Error("NO_SCR_EditorTask cannot hook to the Parent so its not a child of it!");
-		
-		
-		NO_SCR_EditorTask ParentTask = NO_SCR_EditorTask.Cast(Parent);
+
+		NO_SCR_EditorTask ParentTask = NO_SCR_EditorTask.Cast(this);
 		if(!ParentTask) Debug.Error("NO_SCR_EditorTask cannot hook to the Editor Task so its not a child of it!");
 		
 		
@@ -36,7 +33,6 @@ class NO_SCR_EditorTask : SCR_EditorTask
 		array<int> players = {};
 		playerManager.GetAllPlayers(players);
 		
-	
 		SCR_BaseTaskManager manager = NO_SCR_TaskManager.Cast(GetTaskManager());
 		if(m_tTriggerType==TriggerType.Assign)
 		{
