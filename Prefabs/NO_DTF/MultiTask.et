@@ -1,0 +1,19 @@
+NO_SCR_EditorTask {
+ ID "59953E0245B66B53"
+ components {
+  Hierarchy "{59953E0251A129ED}" {
+  }
+  NO_SCR_MultiTaskTriggerComponent "{59953E0255046911}" {
+  }
+  RplComponent "{59953E0251A129E4}" {
+  }
+ }
+ coords 0 0 0
+ m_sName "Kill specific enemy"
+ m_sMapIconName "Icon_Task_Move"
+ m_sTaskListIconName "Icon_Task_Move"
+ m_bNotifyAssignment 1
+ m_bNotifyUnassign 1
+ m_TextType MOVE
+ m_iTaskCompletionType ALWAYS_MANUAL
+}

@@ -342,29 +342,15 @@ GenericEntity Managers {
  }
 }
 NO_SCR_TaskManager TaskManager : "{2DF590FC1A531940}Prefabs/NO_DTF/TaskManager.et" {
- components {
-  NO_SCR_TaskMarkerComponent "{59953E07BC53E919}" {
-  }
-  SCR_UITaskManagerComponent "{598C8B13399DE13F}" {
-  }
- }
  coords 98.193 9.931 149.375
- m_aSupportedTaskTypes {
-  NO_SCR_EditorTaskSupportClass "{59910B601C75D3D5}" {
-  }
- }
  {
-  NO_SCR_EditorTask : "{711972F6DA218682}Prefabs/NO_DTF/Task.et" {
+  NO_SCR_EditorTask : "{231FF93369E30083}Prefabs/NO_DTF/MultiTask.et" {
    components {
-    NO_SCR_MultiTaskTriggerComponent "{599315CBAFAD6F7D}" {
+    NO_SCR_MultiTaskTriggerComponent "{59953E0255046911}" {
      m_tTriggerType Finish
-     m_sTaskNames {
-     }
-     m_allowFailedTasks 1
     }
    }
    coords 0 0 0
-   m_bAssignToFactionOnStart 0
    {
     GenericEntity {
      components {
@@ -445,14 +431,8 @@ NO_SCR_TaskManager TaskManager : "{2DF590FC1A531940}Prefabs/NO_DTF/TaskManager.e
       m_eWhenTypeTrigger All
      }
     }
-    $grp NO_SCR_EditorTask : "{711972F6DA218682}Prefabs/NO_DTF/Task.et" {
-     Task1 {
-      components {
-      }
-      coords 0 0 0
-      m_sName "bla"
-      m_TextType DEFEND
-      m_bAssignToFactionOnStart 0
+    $grp NO_SCR_EditorTask : "{82EC0462F27F5221}Prefabs/NO_DTF/SingleTask.et" {
+     {
       {
        NO_SCR_TaskTrigger {
         components {
@@ -471,11 +451,8 @@ NO_SCR_TaskManager TaskManager : "{2DF590FC1A531940}Prefabs/NO_DTF/TaskManager.e
        }
       }
      }
-     Task2 {
-      coords 0 0 0
-      m_sName "bla2"
-      m_TextType DEFEND
-      m_bAssignToFactionOnStart 0
+     {
+      coords -5.627 2.025 77.959
       {
        NO_SCR_TaskTrigger {
         components {
@@ -484,7 +461,7 @@ NO_SCR_TaskManager TaskManager : "{2DF590FC1A531940}Prefabs/NO_DTF/TaskManager.e
          RplComponent "{598C5DF1DE3CC44F}" {
          }
         }
-        coords -55.003 0 50.521
+        coords -47.12 0 -35.121
         TriggerShapeType Sphere
         SphereRadius 16
         DrawShape 1

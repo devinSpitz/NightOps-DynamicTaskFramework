@@ -9,6 +9,8 @@ NO_SCR_TaskManager {
   }
   RplComponent "{598AE9D4412B1941}" {
   }
+  NO_SCR_TaskMarkerComponent "{59953E07BC53E919}" {
+  }
  }
  coords 105.618 10.001 134.154
  m_aSupportedTaskTypes {
@@ -21,6 +23,8 @@ NO_SCR_TaskManager {
   SCR_CampaignTaskSupportClass "{598C94834B4F3045}" {
   }
   SCR_MoveTaskSupportClass "{598C948358E18628}" {
+  }
+  NO_SCR_EditorTaskSupportClass "{59910B601C75D3D5}" {
   }
  }
 }

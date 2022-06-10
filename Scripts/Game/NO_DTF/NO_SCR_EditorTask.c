@@ -63,7 +63,7 @@ class NO_SCR_EditorTask : SCR_EditorTask
 	void ChangeStateOfTask(TriggerType m_tTriggerType)
 	{
 		
-
+		if(!m_pRplComponent) return;
 		if(!m_pRplComponent.IsMaster()) return;
 		NO_SCR_EditorTask ParentTask = NO_SCR_EditorTask.Cast(this);
 		if(!ParentTask) Debug.Error("NO_SCR_EditorTask cannot hook to the Editor Task so its not a child of it!");
