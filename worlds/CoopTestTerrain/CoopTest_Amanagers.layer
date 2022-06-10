@@ -353,7 +353,16 @@ NO_SCR_TaskManager TaskManager : "{2DF590FC1A531940}Prefabs/NO_DTF/TaskManager.e
  }
  {
   NO_SCR_EditorTask : "{711972F6DA218682}Prefabs/NO_DTF/Task.et" {
+   components {
+    NO_SCR_MultiTaskTriggerComponent "{599315CBAFAD6F7D}" {
+     m_tTriggerType Finish
+     m_sTaskNames {
+     }
+     m_allowFailedTasks 1
+    }
+   }
    coords 0 0 0
+   m_bAssignToFactionOnStart 0
    {
     GenericEntity {
      components {
@@ -431,6 +440,57 @@ NO_SCR_TaskManager TaskManager : "{2DF590FC1A531940}Prefabs/NO_DTF/TaskManager.e
       PeriodicQueries 1
       m_tTriggerType Finish
       m_eActivateType Enter
+      m_eWhenTypeTrigger All
+     }
+    }
+    $grp NO_SCR_EditorTask : "{711972F6DA218682}Prefabs/NO_DTF/Task.et" {
+     Task1 {
+      components {
+      }
+      coords 0 0 0
+      m_sName "bla"
+      m_TextType DEFEND
+      m_bAssignToFactionOnStart 0
+      {
+       NO_SCR_TaskTrigger {
+        components {
+         Hierarchy "{598C5DF1D6E68CED}" {
+         }
+         RplComponent "{598C5DF1DE3CC44F}" {
+         }
+        }
+        coords -77.811 0 41.682
+        TriggerShapeType Sphere
+        SphereRadius 16
+        DrawShape 1
+        TriggerActivationType "All changes"
+        PeriodicQueries 1
+        m_eActivateType Enter
+       }
+      }
+     }
+     Task2 {
+      coords 0 0 0
+      m_sName "bla2"
+      m_TextType DEFEND
+      m_bAssignToFactionOnStart 0
+      {
+       NO_SCR_TaskTrigger {
+        components {
+         Hierarchy "{598C5DF1D6E68CED}" {
+         }
+         RplComponent "{598C5DF1DE3CC44F}" {
+         }
+        }
+        coords -55.003 0 50.521
+        TriggerShapeType Sphere
+        SphereRadius 16
+        DrawShape 1
+        TriggerActivationType "All changes"
+        PeriodicQueries 1
+        m_eActivateType Enter
+       }
+      }
      }
     }
    }

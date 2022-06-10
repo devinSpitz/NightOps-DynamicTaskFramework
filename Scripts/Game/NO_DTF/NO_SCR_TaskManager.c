@@ -6,14 +6,12 @@ class NO_SCR_TaskManagerClass : SCR_BaseTaskManagerClass
 //------------------------------------------------------------------------------------------------
 class NO_SCR_TaskManager : SCR_BaseTaskManager
 {
-	private ref array<IEntity> m_aChildren = new array<IEntity>();;
-	
+	ref array<NO_SCR_EditorTask> m_aTasks = new array<NO_SCR_EditorTask>();
 	protected override void EOnInit(IEntity owner)
 	{
 		
 		super.EOnInit(owner);
 		if (!GetGame().InPlayMode()) return;
-		NO_SCR_DtfStatics.GetAllChildren(owner,m_aChildren);
 	}
 	
 		
@@ -27,8 +25,14 @@ class NO_SCR_TaskManager : SCR_BaseTaskManager
 
 		// Reset faction on initial tasks for JIP (Authority only)
 		//ToDO Implement cache and rplProp
-		//if (m_pRplComponent.IsMaster())
-		//	SetInitialTasksFaction();
+		
+		if (m_RplComponent.IsMaster())
+		{
+			foreach(NO_SCR_EditorTask task : m_aTasks)
+			{
+				task.SetJIPState();
+			}
+		}
 	}
 	
 	

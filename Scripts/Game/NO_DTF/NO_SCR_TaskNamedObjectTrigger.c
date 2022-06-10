@@ -116,14 +116,6 @@ class NO_SCR_TaskNamedObjectTriggerComponent : ScriptComponent
 		if(alreadyTriggered && m_bOneTimeTrigger) return;
 		if(!m_pRplComponent.IsMaster()) return;
 		
-		
-		//PlayerManager playerManager = game.GetPlayerManager();
-		//array<int> players = {};
-		//playerManager.GetAllPlayers(players);
-		
-		
-		
-		
 		if(m_eWhenTypeTrigger == WhenTypeTriggerNamed.Appear)
 		{
 			if(!InTrigger)

@@ -33,7 +33,8 @@ enum WhenTypeTrigger
 	Half,
 	MoreThanHalf,
 	LessThanHalf,
-	AnyChimera
+	AnyChimera,
+	NamedObject
 };
 enum TriggerType
 {

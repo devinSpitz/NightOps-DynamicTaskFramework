@@ -19,6 +19,13 @@ class NO_SCR_TaskTrigger : SCR_BaseTriggerEntity
 	[Attribute("1", UIWidgets.ComboBox, "Condition?","", ParamEnumArray.FromEnum(WhenTypeTrigger), category: "TaskManager:" )]
 	protected WhenTypeTrigger m_eWhenTypeTrigger;	
 	
+	
+	[Attribute("", UIWidgets.EditBox, "When the Condition is on NamedObject than you ahve to set the name here", category: "TaskManager:" )]
+	string m_sTriggerNamedObject;
+	
+	[Attribute("1", UIWidgets.CheckBox, "Should the trigger only work one time?", category: "TaskManager:" )]
+	bool m_bOneTimeTrigger;
+	
 	private ref array<IEntity> playerInTrigger = new array<IEntity>();
 	private RplComponent m_pRplComponent;
 	private IEntity Owner;
@@ -44,6 +51,11 @@ class NO_SCR_TaskTrigger : SCR_BaseTriggerEntity
 	{
 		super.OnInit(owner);
 		Owner=owner;
+		
+		if(m_eWhenTypeTrigger == WhenTypeTrigger.NamedObject && m_sTriggerNamedObject == "") 
+		{
+			 Debug.Error("NO_SCR_TaskTrigger condition is set to named object but there is no name set!");
+		}
 		
 		if (!GetGame().InPlayMode()) return;
 		
@@ -95,7 +107,7 @@ class NO_SCR_TaskTrigger : SCR_BaseTriggerEntity
 	//return as soon as its not valide anymore
 	void Do(bool enter)
 	{
-		if(alreadyTriggered) return;
+		if(alreadyTriggered && m_bOneTimeTrigger) return;
 		if(!m_pRplComponent.IsMaster()) return;
 		
 		if(m_eActivateType == ActivateType.Enter && !enter) return;
@@ -132,10 +144,20 @@ class NO_SCR_TaskTrigger : SCR_BaseTriggerEntity
 		{
 			if(playerInTrigger.Count()<=0) return;
 		}
+		else if(m_eWhenTypeTrigger == WhenTypeTrigger.NamedObject)
+		{
+			bool NamedObjectInside = false;
+			foreach(IEntity player: playerInTrigger)
+			{
+				if(player.GetName()==m_sTriggerNamedObject)
+					NamedObjectInside = true;
+			}
+			if(!NamedObjectInside)
+				return;
+		}
 		
 		
 		ParentTask.ChangeStateOfTask(m_tTriggerType);
-		
 		alreadyTriggered = true;
 	}
 
