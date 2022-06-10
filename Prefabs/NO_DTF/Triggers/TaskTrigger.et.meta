@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{231FF93369E30084}Prefabs/NO_DTF/MultiTask.et"
+ Name "{355FA603A4370198}Prefabs/NO_DTF/Triggers/TaskTrigger.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

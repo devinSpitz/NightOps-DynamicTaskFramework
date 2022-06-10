@@ -28,6 +28,8 @@ class NO_SCR_EditorTask : SCR_EditorTask
 		
 		super.EOnInit(owner);
 		Owner = owner;
+		
+		if (!GetGame().InPlayMode()) return;
 		if(m_bAssignToFactionOnStart) ChangeStateOfTask(TriggerType.Create);
 		
 		

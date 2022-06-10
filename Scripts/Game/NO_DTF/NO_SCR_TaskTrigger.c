@@ -52,6 +52,7 @@ class NO_SCR_TaskTrigger : SCR_BaseTriggerEntity
 		super.OnInit(owner);
 		Owner=owner;
 		
+		if (!GetGame().InPlayMode()) return;
 		if(m_eWhenTypeTrigger == WhenTypeTrigger.NamedObject && m_sTriggerNamedObject == "") 
 		{
 			 Debug.Error("NO_SCR_TaskTrigger condition is set to named object but there is no name set!");

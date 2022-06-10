@@ -1,0 +1,16 @@
+NO_SCR_TaskTrigger {
+ ID "59953E0E6911F654"
+ components {
+  Hierarchy "{59953E0E6569B920}" {
+  }
+  RplComponent "{59953E0E6569B93F}" {
+  }
+ }
+ coords 31.873 10.001 227.777
+ TriggerShapeType Sphere
+ SphereRadius 14.4
+ TriggerActivationType "All changes"
+ PeriodicQueries 1
+ m_tTriggerType Create
+ m_eActivateType Enter
+}

@@ -344,133 +344,57 @@ GenericEntity Managers {
 NO_SCR_TaskManager TaskManager : "{2DF590FC1A531940}Prefabs/NO_DTF/TaskManager.et" {
  coords 98.193 9.931 149.375
  {
-  NO_SCR_EditorTask : "{231FF93369E30083}Prefabs/NO_DTF/MultiTask.et" {
+  NO_SCR_EditorTask : "{231FF93369E30084}Prefabs/NO_DTF/MultiTask.et" {
    components {
     NO_SCR_MultiTaskTriggerComponent "{59953E0255046911}" {
      m_tTriggerType Finish
+     m_allowFailedTasks 1
     }
    }
-   coords 0 0 0
    {
-    GenericEntity {
-     components {
-      Hierarchy "{599315039C504086}" {
-      }
-      NO_SCR_TaskNamedObjectTriggerComponent "{59931502C6BCDA66}" {
-       m_tTriggerType Finish
-       m_sTriggerNamedObject "Team1"
-      }
-      RplComponent "{5993150399A2AE1B}" {
-      }
-     }
-     coords -70.245 0.07 97.838
-    }
-    $grp NO_SCR_TaskTrigger {
+    $grp NO_SCR_TaskTrigger : "{355FA603A4370198}Prefabs/NO_DTF/Triggers/TaskTrigger.et" {
      {
-      components {
-       Hierarchy "{598C5DF1C7976753}" {
-       }
-       RplComponent "{598C5DF1C93B87A7}" {
-       }
-      }
-      coords -31.059 0 78.215
-      TriggerShapeType Sphere
-      SphereRadius 14.4
+      coords -39.658 0 57.483
       DrawShape 1
-      TriggerActivationType "All changes"
-      PeriodicQueries 1
-      m_tTriggerType Create
-      m_eActivateType Enter
      }
      {
-      components {
-       Hierarchy "{598C5DF1D51A0B63}" {
-       }
-       RplComponent "{598C5DF1DB79898E}" {
-       }
-      }
-      coords -24.116 0 109.231
-      TriggerShapeType Sphere
-      SphereRadius 16
+      coords -33.542 0 91.021
       DrawShape 1
-      TriggerActivationType "All changes"
-      PeriodicQueries 1
       m_tTriggerType Assign
-      m_eActivateType Enter
      }
      {
-      components {
-       Hierarchy "{598C5DF1D6E68CED}" {
-       }
-       RplComponent "{598C5DF1DE3CC44F}" {
-       }
-      }
-      coords -36.762 0 155.272
-      TriggerShapeType Sphere
-      SphereRadius 16
+      coords -6.405 0 162.847
       DrawShape 1
-      TriggerActivationType "All changes"
-      PeriodicQueries 1
-      m_eActivateType Enter
-     }
-     {
-      components {
-       Hierarchy "{598C5DF1AF233863}" {
-       }
-       RplComponent "{598C5DF1D14B6FD6}" {
-       }
-      }
-      coords -7.373 0 137.968
-      TriggerShapeType Sphere
-      SphereRadius 16
-      DrawShape 1
-      TriggerActivationType "All changes"
-      PeriodicQueries 1
       m_tTriggerType Finish
-      m_eActivateType Enter
-      m_eWhenTypeTrigger All
+     }
+     {
+      coords -43.212 0 166.625
+      DrawShape 1
+      m_tTriggerType Fail
      }
     }
     $grp NO_SCR_EditorTask : "{82EC0462F27F5221}Prefabs/NO_DTF/SingleTask.et" {
      {
+      coords -60.074 0 32.475
       {
-       NO_SCR_TaskTrigger {
-        components {
-         Hierarchy "{598C5DF1D6E68CED}" {
-         }
-         RplComponent "{598C5DF1DE3CC44F}" {
-         }
-        }
-        coords -77.811 0 41.682
-        TriggerShapeType Sphere
-        SphereRadius 16
+       NO_SCR_TaskTrigger : "{355FA603A4370198}Prefabs/NO_DTF/Triggers/TaskTrigger.et" {
+        coords 0 0 0
         DrawShape 1
-        TriggerActivationType "All changes"
-        PeriodicQueries 1
-        m_eActivateType Enter
        }
       }
      }
      {
-      coords -5.627 2.025 77.959
+      coords -84.693 0 34.452
       {
-       NO_SCR_TaskTrigger {
-        components {
-         Hierarchy "{598C5DF1D6E68CED}" {
-         }
-         RplComponent "{598C5DF1DE3CC44F}" {
-         }
-        }
-        coords -47.12 0 -35.121
-        TriggerShapeType Sphere
-        SphereRadius 16
+       NO_SCR_TaskTrigger : "{355FA603A4370198}Prefabs/NO_DTF/Triggers/TaskTrigger.et" {
+        coords 0 0 0
         DrawShape 1
-        TriggerActivationType "All changes"
-        PeriodicQueries 1
-        m_eActivateType Enter
        }
       }
      }
+    }
+    GenericEntity : "{C3DC2EF20CCBAA2C}Prefabs/NO_DTF/Triggers/NamedObjectTaskTrigger.et" {
+     coords -36.83 0.07 104.218
     }
    }
   }
