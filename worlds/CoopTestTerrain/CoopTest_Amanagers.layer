@@ -343,10 +343,12 @@ GenericEntity Managers {
 }
 NO_SCR_TaskManager TaskManager : "{2DF590FC1A531940}Prefabs/NO_DTF/TaskManager.et" {
  components {
+  NO_SCR_TaskMarkerComponent "{59953E07BC53E919}" {
+  }
   SCR_UITaskManagerComponent "{598C8B13399DE13F}" {
   }
  }
- coords 97.49 9.931 149.439
+ coords 98.193 9.931 149.375
  m_aSupportedTaskTypes {
   NO_SCR_EditorTaskSupportClass "{59910B601C75D3D5}" {
   }
