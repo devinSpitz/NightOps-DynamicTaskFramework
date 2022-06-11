@@ -345,12 +345,7 @@ NO_SCR_TaskManager TaskManager : "{2DF590FC1A531940}Prefabs/NO_DTF/TaskManager.e
  coords 98.193 9.931 149.375
  {
   NO_SCR_EditorTask : "{231FF93369E30084}Prefabs/NO_DTF/MultiTask.et" {
-   components {
-    NO_SCR_MultiTaskTriggerComponent "{59953E0255046911}" {
-     m_tTriggerType Finish
-     m_allowFailedTasks 1
-    }
-   }
+   coords 0 0 0
    {
     $grp NO_SCR_TaskTrigger : "{355FA603A4370198}Prefabs/NO_DTF/Triggers/TaskTrigger.et" {
      {

@@ -3,13 +3,13 @@ NO_SCR_TaskManager {
  components {
   Hierarchy "{598AE9D4436BF11E}" {
   }
+  NO_SCR_TaskMarkerComponent "{59953E07BC53E919}" {
+  }
   SCR_TextsTaskManagerComponent "{598C9483226257D8}" : "{6F59CB11B5383430}Prefabs/MP/Managers/Tasks/TaskManagerComponent.ct" {
   }
   SCR_UITaskManagerComponent "{598C8B13399DE13F}" {
   }
   RplComponent "{598AE9D4412B1941}" {
-  }
-  NO_SCR_TaskMarkerComponent "{59953E07BC53E919}" {
   }
  }
  coords 105.618 10.001 134.154
@@ -17,10 +17,6 @@ NO_SCR_TaskManager {
   SCR_BaseTaskSupportClass "{598C9480494F6CEF}" {
   }
   SCR_TriggerTaskSupportClass "{598C948370715277}" {
-  }
-  SCR_CampaignDefendTaskSupportClass "{598C948343ED1042}" {
-  }
-  SCR_CampaignTaskSupportClass "{598C94834B4F3045}" {
   }
   SCR_MoveTaskSupportClass "{598C948358E18628}" {
   }

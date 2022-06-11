@@ -1,4 +1,14 @@
-NO_SCR_EditorTask : "{231FF93369E30083}Prefabs/NO_DTF/Triggers/MultiTask.et" {
+NO_SCR_EditorTask {
  ID "59953E0245B66B53"
+ components {
+  Hierarchy "{599690AC38E422C1}" {
+  }
+  NO_SCR_MultiTaskTriggerComponent "{599690AC32293EDD}" {
+   m_tTriggerType Finish
+   m_allowFailedTasks 1
+  }
+  RplComponent "{599690AC0DF6829F}" {
+  }
+ }
  coords 0 0 0
 }
