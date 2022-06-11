@@ -7,4 +7,11 @@ NO_SCR_FactionControlTrigger {
   }
  }
  coords 250.549 10.001 269.987
+ TriggerShapeType Sphere
+ SphereRadius 10
+ TriggerActivationType "All changes"
+ PeriodicQueries 1
+ m_sOwnerFactionKey "USSR"
+ m_fFriendlyRatioLimit 1
+ m_tTriggerType Finish
 }
