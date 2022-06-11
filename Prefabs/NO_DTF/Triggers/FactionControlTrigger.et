@@ -1,0 +1,10 @@
+NO_SCR_FactionControlTrigger {
+ ID "5996F7F8D0F9CAF3"
+ components {
+  Hierarchy "{5996F7F8B0795E95}" {
+  }
+  RplComponent "{5996F7F8AEF4BCEC}" {
+  }
+ }
+ coords 250.549 10.001 269.987
+}
