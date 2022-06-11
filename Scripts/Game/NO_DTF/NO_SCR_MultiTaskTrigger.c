@@ -123,7 +123,7 @@ class NO_SCR_MultiTaskTriggerComponent : ScriptComponent
 			if(task && task.IsBadTask(m_allowFailedTasks)) return;
 		}
 		
-		
+
 
 		OwnTask.ChangeStateOfTask(m_tTriggerType);
 		alreadyTriggered = true;

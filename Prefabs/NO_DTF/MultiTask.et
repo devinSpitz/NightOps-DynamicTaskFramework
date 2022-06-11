@@ -1,6 +1,8 @@
 NO_SCR_EditorTask {
  ID "59953E0245B66B53"
  components {
+  MapDescriptorComponent "{59969C4C762AFB7A}" {
+  }
   Hierarchy "{599690AC38E422C1}" {
   }
   NO_SCR_MultiTaskTriggerComponent "{599690AC32293EDD}" {

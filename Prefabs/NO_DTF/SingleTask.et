@@ -3,6 +3,8 @@ NO_SCR_EditorTask {
  components {
   Hierarchy "{59953E01C8D3BEF5}" {
   }
+  SCR_MapDescriptorComponent "{59969C4C43106004}" {
+  }
   RplComponent "{59953E01C8D3BE05}" {
   }
  }
@@ -12,7 +14,6 @@ NO_SCR_EditorTask {
  m_sTaskListIconName "Icon_Task_Move"
  m_bNotifyAssignment 1
  m_bNotifyUnassign 1
- m_TextType DEFEND
  m_iTaskCompletionType ALWAYS_MANUAL
  m_bAssignToFactionOnStart 0
 }

@@ -30,20 +30,29 @@ class NO_SCR_EditorTask : SCR_EditorTask
 		Owner = owner;
 		
 		if (!GetGame().InPlayMode()) return;
-		if(m_bAssignToFactionOnStart) ChangeStateOfTask(TriggerType.Create);
-		
 		
 		//tell the taskmanager that we are here
 		SCR_BaseTaskManager manager = GetTaskManager();
 		NO_SCR_TaskManager realManager = NO_SCR_TaskManager.Cast(manager);
 		realManager.m_aTasks.Insert(this);
+	
 		
 		m_pRplComponent = RplComponent.Cast(this.FindComponent(RplComponent));
 		if(!m_pRplComponent) Debug.Error("NO_SCR_EditorTask cannot hook to the RplComponent please add one!");
 		
+
 		
 		if(!m_pRplComponent.IsMaster()) return;
 			
+		
+				
+		if(m_bAssignToFactionOnStart) 
+		{
+			ChangeStateOfTask(TriggerType.Create);
+			ChangeStateOfTask(TriggerType.Assign);
+		}
+		
+		
 		IEntity Parent = GetParent();
 		if(!Parent) Debug.Error("NO_SCR_TaskTrigger cannot hook to the Parent so its not a child of it!");
 		
