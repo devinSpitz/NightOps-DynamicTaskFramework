@@ -1,0 +1,10 @@
+NO_SCR_EditorTask : "{82EC0462F27F5221}Prefabs/NO_DTF/SingleTask.et" {
+ ID "59953E02005EB511"
+ coords 132.524 10.001 285.092
+ {
+  NO_SCR_FactionControlTrigger : "{B1CE7083D2723938}Prefabs/NO_DTF/Triggers/FactionControlTrigger.et" {
+   ID "5996F7F9EBC16B54"
+   coords -3.836 0 -2.407
+  }
+ }
+}
