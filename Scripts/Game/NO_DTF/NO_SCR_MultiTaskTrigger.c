@@ -22,28 +22,12 @@ class NO_SCR_MultiTaskTriggerComponent : ScriptComponent
 	[Attribute("0", UIWidgets.CheckBox, "Not only allow completed task to trigger but also failed", category: "TaskManager:")]
 	bool m_allowFailedTasks;	
 	
-	[Attribute("", UIWidgets.EditBox, "Add names of tasks to be created when MultiTask is complete.", category: "TaskManager:" )]
-	ref array<string> m_sCreateTaskNames;
-		
-	[Attribute("0", UIWidgets.CheckBox, "Assign the first task in the list", category: "TaskManager:")]
-	bool m_bAssignFirstTask;
-	
-	[Attribute("0", UIWidgets.CheckBox, desc: "End game when Multi Task complete", category: "TaskManager:")]
-	protected bool m_bEnableGameOver;
-	
-	[Attribute("EDITOR_FACTION_VICTORY", UIWidgets.ComboBox, desc: "Customize these on SCR_GameOverScreenManagerComponent on SCR_BaseGameMode.", category: "TaskManager:", enums: ParamEnumArray.FromEnum(ESupportedEndReasonsMultiTask))]
-	protected int m_iGameOverType;
-	
-	[Attribute("US", UIWidgets.EditBox, desc: "Key of winning faction, or player faction if draw.", category: "TaskManager:")]
-	protected string m_sWinningFactionKey;
-	
 	
 	private RplComponent m_pRplComponent;
 	private IEntity Owner;
 	private NO_SCR_EditorTask OwnTask;
 	
 	private bool alreadyTriggered = false;
-	private bool alreadyAssigned = false;
 	private NO_SCR_TaskManager manager;
 	
 	ArmaReforgerScripted game;
@@ -141,54 +125,9 @@ class NO_SCR_MultiTaskTriggerComponent : ScriptComponent
 
 
 		OwnTask.ChangeStateOfTask(m_tTriggerType);
-		foreach(string task : m_sCreateTaskNames)
-		{
-			IEntity newtaskEntity = world.FindEntityByName(task);
-			NO_SCR_EditorTask newtaskObject = NO_SCR_EditorTask.Cast(newtaskEntity);
-			newtaskObject.ChangeStateOfTask(TriggerType.Create);	
-			if (alreadyAssigned) return;
-			if (!m_bAssignFirstTask) return;
-			newtaskObject.ChangeStateOfTask(TriggerType.Assign);		
-			alreadyAssigned = true;
-		}
 		alreadyTriggered = true;
-		GameOver();
 		
 	}
 	
-	protected void GameOver()
-	{
-		if (!m_bEnableGameOver)
-			return;
-
-		SCR_BaseGameMode gameMode = SCR_BaseGameMode.Cast(GetGame().GetGameMode());
-		if (!gameMode)
-			return;
-
-		Faction winningFaction = GetGame().GetFactionManager().GetFactionByKey(m_sWinningFactionKey);
-		if (!winningFaction)
-			return;
-
-		int winningFactionIndex = GetGame().GetFactionManager().GetFactionIndex(winningFaction);
-
-		if (winningFactionIndex != -1)
-			gameMode.EndGameMode(SCR_GameModeEndData.CreateSimple(m_iGameOverType, -1, winningFactionIndex));
-	}
 	
-	
-}
-	
-enum ESupportedEndReasonsMultiTask
-{
-	UNDEFINED = -1,
-	TIMELIMIT = -2,
-	SCORELIMIT = -3,
-	DRAW = -4,
-	SERVER_RESTART = -5,
-
-	EDITOR_NEUTRAL = 1000,
-	EDITOR_FACTION_NEUTRAL = 1001,
-	EDITOR_FACTION_VICTORY = 1002,
-	//EDITOR_FACTION_DEFEAT = 1003,
-	EDITOR_FACTION_DRAW = 1004
 }

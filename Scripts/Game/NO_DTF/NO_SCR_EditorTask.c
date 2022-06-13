@@ -19,9 +19,41 @@ class NO_SCR_EditorTask : SCR_EditorTask
 	[Attribute("", UIWidgets.EditBox, "When set and the a task is assigned as well as the TaskManager has the checkbox set the marker will be on the position of the ObjectName you entered here!", category: "TaskManager:" )]
 	string m_sAdditionalMarkerPosition;
 	
+	[Attribute("", UIWidgets.EditBox, "Add names of tasks to be created when Task is finished.", category: "TaskManager:" )]
+	ref array<string> m_sCreateTaskNamesSuccess;
+	
+	[Attribute("", UIWidgets.EditBox, "Add names of tasks to be created when Task is failed.", category: "TaskManager:" )]
+	ref array<string> m_sCreateTaskNamesFail;
+		
+	[Attribute("0", UIWidgets.CheckBox, "Assign the first task in the list", category: "TaskManager:")]
+	bool m_bAssignFirstTask;
+	
+	[Attribute("0", UIWidgets.CheckBox, desc: "End game when Task is finished", category: "Game Over")]
+	protected bool m_bEnableGameOverSuccess;
+	
+	[Attribute("EDITOR_FACTION_VICTORY", UIWidgets.ComboBox, desc: "Customize these on SCR_GameOverScreenManagerComponent on SCR_BaseGameMode.", category: "Game Over", enums: ParamEnumArray.FromEnum(ESupportedEndReasonsTask))]
+	protected int m_iGameOverTypeSuccess;
+	
+	[Attribute("US", UIWidgets.EditBox, desc: "Key of winning faction, or player faction if draw.", category: "Game Over")]
+	protected string m_sWinningFactionKeySuccess;
+	
+	
+	[Attribute("0", UIWidgets.CheckBox, desc: "End game when Task is finished", category: "Game Over")]
+	protected bool m_bEnableGameOverFail;
+	
+	[Attribute("EDITOR_FACTION_VICTORY", UIWidgets.ComboBox, desc: "Customize these on SCR_GameOverScreenManagerComponent on SCR_BaseGameMode.", category: "Game Over", enums: ParamEnumArray.FromEnum(ESupportedEndReasonsTask))]
+	protected int m_iGameOverTypeFail;
+	
+	[Attribute("USSR", UIWidgets.EditBox, desc: "Key of winning faction, or player faction if draw.", category: "Game Over")]
+	protected string m_sWinningFactionKeyFail;
+	
 	TriggerType TaskState = null;
 	RplComponent m_pRplComponent;
 	IEntity Owner;
+	private bool alreadyAssigned = false;
+	
+	ArmaReforgerScripted game;
+	BaseWorld world;
 	
 	override void EOnInit(IEntity owner)
 	{
@@ -41,6 +73,19 @@ class NO_SCR_EditorTask : SCR_EditorTask
 		if(!m_pRplComponent) Debug.Error("NO_SCR_EditorTask cannot hook to the RplComponent please add one!");
 		
 
+		game = GetGame();
+		if(!game)
+		{
+			Debug.Error("NO_SCR_TaskTrigger cannot hook on the Game!");	
+			return;
+		} 
+		
+		world = game.GetWorld();
+		if(!world)
+		{
+			Debug.Error("NO_SCR_TaskTrigger cannot hook on the World!");	
+			return;
+		} 
 		
 		if(!m_pRplComponent.IsMaster()) return;
 			
@@ -79,8 +124,6 @@ class NO_SCR_EditorTask : SCR_EditorTask
 		NO_SCR_EditorTask ParentTask = NO_SCR_EditorTask.Cast(this);
 		if(!ParentTask) Debug.Error("NO_SCR_EditorTask cannot hook to the Editor Task so its not a child of it!");
 		
-		
-		ArmaReforgerScripted game = GetGame();
 		if(!game) return;
 		
 		PlayerManager playerManager = game.GetPlayerManager();
@@ -104,11 +147,13 @@ class NO_SCR_EditorTask : SCR_EditorTask
 		{
 			manager.FailTask(ParentTask);
 			TaskState = TriggerType.Fail;
+			GameOverLose();
 		}
 		else if(m_tTriggerType==TriggerType.Finish)
 		{
 			manager.FinishTask(ParentTask);
 			TaskState = TriggerType.Finish;
+			GameOverWin();
 		}
 		else if(m_tTriggerType==TriggerType.Create)
 		{
@@ -128,5 +173,89 @@ class NO_SCR_EditorTask : SCR_EditorTask
 		
 		return false;
 	}
+	
+	protected void GameOverWin()
+	{
+		if (!m_bEnableGameOverSuccess)
+			return;
+
+		SCR_BaseGameMode gameMode = SCR_BaseGameMode.Cast(GetGame().GetGameMode());
+		if (!gameMode)
+			return;
+
+		Faction winningFaction = GetGame().GetFactionManager().GetFactionByKey(m_sWinningFactionKeySuccess);
+		if (!winningFaction)
+			return;
+
+		int winningFactionIndex = GetGame().GetFactionManager().GetFactionIndex(winningFaction);
+
+		if (winningFactionIndex != -1)
+			gameMode.EndGameMode(SCR_GameModeEndData.CreateSimple(m_iGameOverTypeSuccess, -1, winningFactionIndex));
+	}
+	
+	protected void GameOverLose()
+	{
+		if (!m_bEnableGameOverFail)
+			return;
+
+		SCR_BaseGameMode gameMode = SCR_BaseGameMode.Cast(GetGame().GetGameMode());
+		if (!gameMode)
+			return;
+
+		Faction winningFaction = GetGame().GetFactionManager().GetFactionByKey(m_sWinningFactionKeyFail);
+		if (!winningFaction)
+			return;
+
+		int winningFactionIndex = GetGame().GetFactionManager().GetFactionIndex(winningFaction);
+
+		if (winningFactionIndex != -1)
+			gameMode.EndGameMode(SCR_GameModeEndData.CreateSimple(m_iGameOverTypeFail, -1, winningFactionIndex));
+	}
+	
+	protected void CreateNewTasksWin()
+	{
+		alreadyAssigned = false;
+		foreach(string task : m_sCreateTaskNamesSuccess)
+		{
+			IEntity newtaskEntity = world.FindEntityByName(task);
+			NO_SCR_EditorTask newtaskObject = NO_SCR_EditorTask.Cast(newtaskEntity);
+			newtaskObject.ChangeStateOfTask(TriggerType.Create);	
+			if (alreadyAssigned) return;
+			if (!m_bAssignFirstTask) return;
+			newtaskObject.ChangeStateOfTask(TriggerType.Assign);		
+			alreadyAssigned = true;
+		}
+	}
+	
+	protected void CreateNewTasksLose()
+	{
+		alreadyAssigned = false;
+		foreach(string task : m_sCreateTaskNamesFail)
+		{
+			IEntity newtaskEntity = world.FindEntityByName(task);
+			NO_SCR_EditorTask newtaskObject = NO_SCR_EditorTask.Cast(newtaskEntity);
+			newtaskObject.ChangeStateOfTask(TriggerType.Create);	
+			if (alreadyAssigned) return;
+			if (!m_bAssignFirstTask) return;
+			newtaskObject.ChangeStateOfTask(TriggerType.Assign);		
+			alreadyAssigned = true;
+		}
+	}
 		
+}
+
+
+enum ESupportedEndReasonsTask
+{
+	UNDEFINED = -1,
+	TIMELIMIT = -2,
+	SCORELIMIT = -3,
+	DRAW = -4,
+	SERVER_RESTART = -5,
+
+	EDITOR_NEUTRAL = 1000,
+	EDITOR_FACTION_NEUTRAL = 1001,
+	EDITOR_FACTION_VICTORY = 1002,
+	//EDITOR_FACTION_DEFEAT = 1003,
+	EDITOR_FACTION_DRAW = 1004
 }
