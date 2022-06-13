@@ -376,6 +376,7 @@ NO_SCR_TaskManager TaskManager : "{2DF590FC1A531940}Prefabs/NO_DTF/TaskManager.e
        NO_SCR_TaskTrigger : "{355FA603A4370198}Prefabs/NO_DTF/Triggers/TaskTrigger.et" {
         coords 0 0 0
         DrawShape 1
+        m_tTriggerType Fail
        }
       }
      }
@@ -385,6 +386,7 @@ NO_SCR_TaskManager TaskManager : "{2DF590FC1A531940}Prefabs/NO_DTF/TaskManager.e
        NO_SCR_TaskTrigger : "{355FA603A4370198}Prefabs/NO_DTF/Triggers/TaskTrigger.et" {
         coords 0 0 0
         DrawShape 1
+        m_tTriggerType Fail
        }
       }
      }

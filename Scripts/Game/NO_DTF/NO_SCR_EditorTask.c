@@ -65,10 +65,6 @@ class NO_SCR_EditorTask : SCR_EditorTask
 	
 	override void EOnInit(IEntity owner)
 	{
-		m_OnFinishTask.Insert(OnFinish);
-		m_OnFailTask.Insert(OnFailTask);
-		m_OnAssignTask.Insert(OnAssignTask);
-		m_OnCreateTask.Insert(OnCreateTask);
 		super.EOnInit(owner);
 		Owner = owner;
 		
@@ -101,6 +97,10 @@ class NO_SCR_EditorTask : SCR_EditorTask
 		if(!m_pRplComponent.IsMaster()) return;
 			
 		
+		m_OnFinishTask.Insert(OnFinish);
+		m_OnFailTask.Insert(OnFailTask);
+		m_OnAssignTask.Insert(OnAssignTask);
+		m_OnCreateTask.Insert(OnCreateTask);
 				
 		if(m_bAssignToFactionOnStart) 
 		{
