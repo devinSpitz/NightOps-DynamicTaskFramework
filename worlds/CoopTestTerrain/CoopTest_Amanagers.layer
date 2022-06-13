@@ -346,6 +346,17 @@ NO_SCR_TaskManager TaskManager : "{2DF590FC1A531940}Prefabs/NO_DTF/TaskManager.e
  {
   NO_SCR_EditorTask : "{231FF93369E30084}Prefabs/NO_DTF/MultiTask.et" {
    coords 0 0 0
+   userScript "	void bla()"\
+   "	{"\
+   "		Print(\"döner\");"\
+   "	}"\
+   "	"\
+   "		"\
+   "	override void EOnInit(IEntity owner)"\
+   "	{"\
+   "		super.EOnInit(owner);"\
+   "		m_OnCreateTask.Insert(bla);"\
+   "	}"
    m_bAssignToFactionOnStart 0
    {
     $grp NO_SCR_TaskTrigger : "{355FA603A4370198}Prefabs/NO_DTF/Triggers/TaskTrigger.et" {
@@ -359,12 +370,12 @@ NO_SCR_TaskManager TaskManager : "{2DF590FC1A531940}Prefabs/NO_DTF/TaskManager.e
       m_tTriggerType Assign
      }
      {
-      coords -6.405 0 162.847
+      coords -24.424 0 125.381
       DrawShape 1
       m_tTriggerType Finish
      }
      {
-      coords -43.212 0 166.625
+      coords -61.231 0 129.159
       DrawShape 1
       m_tTriggerType Fail
      }

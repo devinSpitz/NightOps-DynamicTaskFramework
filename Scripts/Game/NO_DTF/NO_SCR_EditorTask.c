@@ -58,6 +58,8 @@ class NO_SCR_EditorTask : SCR_EditorTask
     protected ref ScriptInvoker m_OnFailTask = new ScriptInvoker();
     protected ref ScriptInvoker m_OnAssignTask = new ScriptInvoker();
     protected ref ScriptInvoker m_OnCreateTask = new ScriptInvoker();
+	
+	event protected void OnFinish();
 	event protected void OnFinishTask();
 	event protected void OnAssignTask();
 	event protected void OnCreateTask();
@@ -96,7 +98,6 @@ class NO_SCR_EditorTask : SCR_EditorTask
 		
 		if(!m_pRplComponent.IsMaster()) return;
 			
-		
 		m_OnFinishTask.Insert(OnFinishTask);
 		m_OnFailTask.Insert(OnFailTask);
 		m_OnAssignTask.Insert(OnAssignTask);

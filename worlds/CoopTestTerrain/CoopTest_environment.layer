@@ -1,6 +1,6 @@
 $grp CommentEntity {
  Comment4 {
-  coords 53.006 11.172 318.144
+  coords 34.987 11.172 280.678
   m_Comment "Fail Task"
   m_Size 0.5
   m_Color 0.251 0.502 0
@@ -9,7 +9,7 @@ $grp CommentEntity {
   m_VisibleIngame 1
  }
  Comment3 {
-  coords 92.542 11.172 310.132
+  coords 74.523 11.172 272.666
   m_Comment "Complete Task"
   m_Size 0.5
   m_Color 0.251 0.502 0
