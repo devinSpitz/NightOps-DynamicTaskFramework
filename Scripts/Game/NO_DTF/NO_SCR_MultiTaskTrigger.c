@@ -22,6 +22,11 @@ class NO_SCR_MultiTaskTriggerComponent : ScriptComponent
 	[Attribute("0", UIWidgets.CheckBox, "Not only allow completed task to trigger but also failed", category: "TaskManager:")]
 	bool m_allowFailedTasks;	
 	
+	[Attribute("", UIWidgets.EditBox, "Add names of tasks to be created when MultiTask is complete.", category: "TaskManager:" )]
+	ref array<string> m_sCreateTaskNames;
+		
+	[Attribute("0", UIWidgets.CheckBox, "Assign the first task in the list", category: "TaskManager:")]
+	bool m_bAssignFirstTask;
 	
 	
 	private RplComponent m_pRplComponent;
@@ -29,6 +34,7 @@ class NO_SCR_MultiTaskTriggerComponent : ScriptComponent
 	private NO_SCR_EditorTask OwnTask;
 	
 	private bool alreadyTriggered = false;
+	private bool alreadyAssigned = false;
 	private NO_SCR_TaskManager manager;
 	
 	ArmaReforgerScripted game;
@@ -126,6 +132,16 @@ class NO_SCR_MultiTaskTriggerComponent : ScriptComponent
 
 
 		OwnTask.ChangeStateOfTask(m_tTriggerType);
+		foreach(string task : m_sCreateTaskNames)
+		{
+			IEntity newtaskEntity = world.FindEntityByName(task);
+			NO_SCR_EditorTask newtaskObject = NO_SCR_EditorTask.Cast(newtaskEntity);
+			newtaskObject.ChangeStateOfTask(TriggerType.Create);	
+			if (alreadyAssigned) return;
+			if (!m_bAssignFirstTask) return;
+			newtaskObject.ChangeStateOfTask(TriggerType.Assign);		
+			alreadyAssigned = true;
+		}
 		alreadyTriggered = true;
 		
 	}
