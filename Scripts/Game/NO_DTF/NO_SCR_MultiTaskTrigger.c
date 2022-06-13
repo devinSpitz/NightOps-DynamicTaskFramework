@@ -31,7 +31,7 @@ class NO_SCR_MultiTaskTriggerComponent : ScriptComponent
 	[Attribute("0", UIWidgets.CheckBox, desc: "End game when Multi Task complete", category: "TaskManager:")]
 	protected bool m_bEnableGameOver;
 	
-	[Attribute("EDITOR_FACTION_VICTORY", UIWidgets.ComboBox, desc: "Customize these on SCR_GameOverScreenManagerComponent on SCR_BaseGameMode.", category: "TaskManager:", enums: ParamEnumArray.FromEnum(ESupportedEndReasons))]
+	[Attribute("EDITOR_FACTION_VICTORY", UIWidgets.ComboBox, desc: "Customize these on SCR_GameOverScreenManagerComponent on SCR_BaseGameMode.", category: "TaskManager:", enums: ParamEnumArray.FromEnum(ESupportedEndReasonsMultiTask))]
 	protected int m_iGameOverType;
 	
 	[Attribute("US", UIWidgets.EditBox, desc: "Key of winning faction, or player faction if draw.", category: "TaskManager:")]
@@ -178,7 +178,7 @@ class NO_SCR_MultiTaskTriggerComponent : ScriptComponent
 	
 }
 	
-enum ESupportedEndReasons
+enum ESupportedEndReasonsMultiTask
 {
 	UNDEFINED = -1,
 	TIMELIMIT = -2,
