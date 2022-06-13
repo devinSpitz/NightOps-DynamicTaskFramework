@@ -55,6 +55,10 @@ class NO_SCR_EditorTask : SCR_EditorTask
 	ArmaReforgerScripted game;
 	BaseWorld world;
 	
+	
+	event protected void OnFinish();
+	event protected void OnFail();
+	
 	override void EOnInit(IEntity owner)
 	{
 		
@@ -147,6 +151,7 @@ class NO_SCR_EditorTask : SCR_EditorTask
 		{
 			manager.FailTask(ParentTask);
 			TaskState = TriggerType.Fail;
+			OnFail();
 			GameOverLose();
 			CreateNewTasksLose();
 		}
@@ -154,6 +159,7 @@ class NO_SCR_EditorTask : SCR_EditorTask
 		{
 			manager.FinishTask(ParentTask);
 			TaskState = TriggerType.Finish;
+			OnFinish();
 			GameOverWin();
 			CreateNewTasksWin();
 		}
