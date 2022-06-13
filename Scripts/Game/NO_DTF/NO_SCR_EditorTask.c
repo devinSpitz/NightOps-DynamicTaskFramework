@@ -17,17 +17,17 @@ class NO_SCR_EditorTask : SCR_EditorTask
 	[Attribute("", UIWidgets.EditBox, "When set and the a task is assigned as well as the TaskManager has the checkbox set the marker will be on the position of the ObjectName you entered here!", category: "TaskManager:" )]
 	string m_sAdditionalMarkerPosition;
 	
-	[Attribute("", UIWidgets.EditBox, "Add names of tasks to be created when Task is finished.", category: "TaskManager:" )]
+	[Attribute("", UIWidgets.EditBox, "Add names of tasks to be created when Task is finished.", category: "Successor:" )]
 	ref array<string> m_sCreateTaskNamesSuccess;
 	
-	[Attribute("", UIWidgets.EditBox, "Add names of tasks to be created when Task is failed.", category: "TaskManager:" )]
+	[Attribute("", UIWidgets.EditBox, "Add names of tasks to be created when Task is failed.", category: "Successor:" )]
 	ref array<string> m_sCreateTaskNamesFail;
 		
-	[Attribute("0", UIWidgets.CheckBox, "Assign the first task in the list", category: "TaskManager:")]
+	[Attribute("0", UIWidgets.CheckBox, "Assign the first task in the list", category: "Successor:")]
 	bool m_bAssignFirstTask;
 	
 	[Attribute("0", UIWidgets.CheckBox, desc: "End game when Task is finished", category: "Game Over")]
-	protected bool m_bEnableGameOverSuccess;
+	protected bool m_bEnableGameOverOnSuccess;
 	
 	[Attribute("EDITOR_FACTION_VICTORY", UIWidgets.ComboBox, desc: "Customize these on SCR_GameOverScreenManagerComponent on SCR_BaseGameMode.", category: "Game Over", enums: ParamEnumArray.FromEnum(ESupportedEndReasonsTask))]
 	protected int m_iGameOverTypeSuccess;
@@ -37,7 +37,7 @@ class NO_SCR_EditorTask : SCR_EditorTask
 	
 	
 	[Attribute("0", UIWidgets.CheckBox, desc: "End game when Task is failed", category: "Game Over")]
-	protected bool m_bEnableGameOverFail;
+	protected bool m_bEnableGameOverOnFail;
 	
 	[Attribute("EDITOR_FACTION_VICTORY", UIWidgets.ComboBox, desc: "Customize these on SCR_GameOverScreenManagerComponent on SCR_BaseGameMode.", category: "Game Over", enums: ParamEnumArray.FromEnum(ESupportedEndReasonsTask))]
 	protected int m_iGameOverTypeFail;
@@ -54,8 +54,10 @@ class NO_SCR_EditorTask : SCR_EditorTask
 	BaseWorld world;
 	
 	
-	event protected void OnFinish();
-	event protected void OnFail();
+    protected ref ScriptInvoker m_OnFinishTask = new ScriptInvoker();
+    protected ref ScriptInvoker m_OnFailTask = new ScriptInvoker();
+    protected ref ScriptInvoker m_OnAssignTask = new ScriptInvoker();
+    protected ref ScriptInvoker m_OnCreateTask = new ScriptInvoker();
 	
 	override void EOnInit(IEntity owner)
 	{
@@ -143,13 +145,14 @@ class NO_SCR_EditorTask : SCR_EditorTask
 				manager.AssignTask(ParentTask,taskExecutor,manager.m_bShowGMMessageWhenAssigningTasks);
 			}
 			TaskState = TriggerType.Assign;
+			m_OnAssignTask.Invoke();
 			
 		}
 		else if(m_tTriggerType==TriggerType.Fail)
 		{
 			manager.FailTask(ParentTask);
 			TaskState = TriggerType.Fail;
-			OnFail();
+			m_OnFinishTask.Invoke();
 			GameOverLose();
 			CreateNewTasksLose();
 		}
@@ -157,12 +160,13 @@ class NO_SCR_EditorTask : SCR_EditorTask
 		{
 			manager.FinishTask(ParentTask);
 			TaskState = TriggerType.Finish;
-			OnFinish();
+			m_OnFailTask.Invoke();
 			GameOverWin();
 			CreateNewTasksWin();
 		}
 		else if(m_tTriggerType==TriggerType.Create)
 		{
+			m_OnCreateTask.Invoke();
 			manager.SetTaskFaction(ParentTask,game.GetFactionManager().GetFactionByKey(ParentTask.m_faction));
 			TaskState = TriggerType.Create;
 		}
@@ -182,7 +186,7 @@ class NO_SCR_EditorTask : SCR_EditorTask
 	
 	protected void GameOverWin()
 	{
-		if (!m_bEnableGameOverSuccess)
+		if (!m_bEnableGameOverOnSuccess)
 			return;
 
 		SCR_BaseGameMode gameMode = SCR_BaseGameMode.Cast(GetGame().GetGameMode());
@@ -201,7 +205,7 @@ class NO_SCR_EditorTask : SCR_EditorTask
 	
 	protected void GameOverLose()
 	{
-		if (!m_bEnableGameOverFail)
+		if (!m_bEnableGameOverOnFail)
 			return;
 
 		SCR_BaseGameMode gameMode = SCR_BaseGameMode.Cast(GetGame().GetGameMode());
