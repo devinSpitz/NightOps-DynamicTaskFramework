@@ -6,6 +6,12 @@ class NO_SCR_TaskManagerClass : SCR_BaseTaskManagerClass
 //------------------------------------------------------------------------------------------------
 class NO_SCR_TaskManager : SCR_BaseTaskManager
 {
+			
+	[Attribute("0", UIWidgets.CheckBox, "Show that the GM has assigned the Tasks!", category: "TaskManager:")]
+	bool m_bShowGMMessageWhenAssigningTasks;	
+	
+	
+	
 	ref array<NO_SCR_EditorTask> m_aTasks = new array<NO_SCR_EditorTask>();
 	protected override void EOnInit(IEntity owner)
 	{
