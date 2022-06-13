@@ -38,7 +38,7 @@ class NO_SCR_EditorTask : SCR_EditorTask
 	protected string m_sWinningFactionKeySuccess;
 	
 	
-	[Attribute("0", UIWidgets.CheckBox, desc: "End game when Task is finished", category: "Game Over")]
+	[Attribute("0", UIWidgets.CheckBox, desc: "End game when Task is failed", category: "Game Over")]
 	protected bool m_bEnableGameOverFail;
 	
 	[Attribute("EDITOR_FACTION_VICTORY", UIWidgets.ComboBox, desc: "Customize these on SCR_GameOverScreenManagerComponent on SCR_BaseGameMode.", category: "Game Over", enums: ParamEnumArray.FromEnum(ESupportedEndReasonsTask))]
