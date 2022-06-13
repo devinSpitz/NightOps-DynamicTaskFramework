@@ -148,12 +148,14 @@ class NO_SCR_EditorTask : SCR_EditorTask
 			manager.FailTask(ParentTask);
 			TaskState = TriggerType.Fail;
 			GameOverLose();
+			CreateNewTasksLose();
 		}
 		else if(m_tTriggerType==TriggerType.Finish)
 		{
 			manager.FinishTask(ParentTask);
 			TaskState = TriggerType.Finish;
 			GameOverWin();
+			CreateNewTasksWin();
 		}
 		else if(m_tTriggerType==TriggerType.Create)
 		{
