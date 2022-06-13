@@ -159,23 +159,23 @@ class NO_SCR_EditorTask : SCR_EditorTask
 		{
 			manager.FailTask(ParentTask);
 			TaskState = TriggerType.Fail;
-			m_OnFinishTask.Invoke();
 			GameOverLose();
 			CreateNewTasksLose();
+			m_OnFinishTask.Invoke();
 		}
 		else if(m_tTriggerType==TriggerType.Finish)
 		{
 			manager.FinishTask(ParentTask);
 			TaskState = TriggerType.Finish;
-			m_OnFailTask.Invoke();
 			GameOverWin();
 			CreateNewTasksWin();
+			m_OnFailTask.Invoke();
 		}
 		else if(m_tTriggerType==TriggerType.Create)
 		{
-			m_OnCreateTask.Invoke();
 			manager.SetTaskFaction(ParentTask,game.GetFactionManager().GetFactionByKey(ParentTask.m_faction));
 			TaskState = TriggerType.Create;
+			m_OnCreateTask.Invoke();
 		}
 		
 		
@@ -237,8 +237,8 @@ class NO_SCR_EditorTask : SCR_EditorTask
 			IEntity newtaskEntity = world.FindEntityByName(task);
 			NO_SCR_EditorTask newtaskObject = NO_SCR_EditorTask.Cast(newtaskEntity);
 			newtaskObject.ChangeStateOfTask(TriggerType.Create);	
-			if (alreadyAssigned) return;
-			if (!m_bAssignFirstTask) return;
+			if (alreadyAssigned) continue;
+			if (!m_bAssignFirstTask) continue;
 			newtaskObject.ChangeStateOfTask(TriggerType.Assign);		
 			alreadyAssigned = true;
 		}
@@ -252,8 +252,8 @@ class NO_SCR_EditorTask : SCR_EditorTask
 			IEntity newtaskEntity = world.FindEntityByName(task);
 			NO_SCR_EditorTask newtaskObject = NO_SCR_EditorTask.Cast(newtaskEntity);
 			newtaskObject.ChangeStateOfTask(TriggerType.Create);	
-			if (alreadyAssigned) return;
-			if (!m_bAssignFirstTask) return;
+			if (alreadyAssigned) continue;
+			if (!m_bAssignFirstTask) continue;
 			newtaskObject.ChangeStateOfTask(TriggerType.Assign);		
 			alreadyAssigned = true;
 		}
