@@ -23,7 +23,6 @@ class NO_SCR_MultiTaskTriggerComponent : ScriptComponent
 	bool m_allowFailedTasks;	
 	
 	
-	
 	private RplComponent m_pRplComponent;
 	private IEntity Owner;
 	private NO_SCR_EditorTask OwnTask;
@@ -129,9 +128,6 @@ class NO_SCR_MultiTaskTriggerComponent : ScriptComponent
 		alreadyTriggered = true;
 		
 	}
-	
-	
-
 	
 	
 }
