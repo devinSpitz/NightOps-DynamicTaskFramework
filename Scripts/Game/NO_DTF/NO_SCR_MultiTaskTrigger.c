@@ -28,6 +28,15 @@ class NO_SCR_MultiTaskTriggerComponent : ScriptComponent
 	[Attribute("0", UIWidgets.CheckBox, "Assign the first task in the list", category: "TaskManager:")]
 	bool m_bAssignFirstTask;
 	
+	[Attribute("0", UIWidgets.CheckBox, desc: "End game when Multi Task complete", category: "TaskManager:")]
+	protected bool m_bEnableGameOver;
+	
+	[Attribute("EDITOR_FACTION_VICTORY", UIWidgets.ComboBox, desc: "Customize these on SCR_GameOverScreenManagerComponent on SCR_BaseGameMode.", category: "TaskManager:", enums: ParamEnumArray.FromEnum(ESupportedEndReasons))]
+	protected int m_iGameOverType;
+	
+	[Attribute("US", UIWidgets.EditBox, desc: "Key of winning faction, or player faction if draw.", category: "TaskManager:")]
+	protected string m_sWinningFactionKey;
+	
 	
 	private RplComponent m_pRplComponent;
 	private IEntity Owner;
@@ -143,11 +152,43 @@ class NO_SCR_MultiTaskTriggerComponent : ScriptComponent
 			alreadyAssigned = true;
 		}
 		alreadyTriggered = true;
+		GameOver();
 		
 	}
 	
-	
+	protected void GameOver()
+	{
+		if (!m_bEnableGameOver)
+			return;
 
+		SCR_BaseGameMode gameMode = SCR_BaseGameMode.Cast(GetGame().GetGameMode());
+		if (!gameMode)
+			return;
+
+		Faction winningFaction = GetGame().GetFactionManager().GetFactionByKey(m_sWinningFactionKey);
+		if (!winningFaction)
+			return;
+
+		int winningFactionIndex = GetGame().GetFactionManager().GetFactionIndex(winningFaction);
+
+		if (winningFactionIndex != -1)
+			gameMode.EndGameMode(SCR_GameModeEndData.CreateSimple(m_iGameOverType, -1, winningFactionIndex));
+	}
 	
 	
+}
+	
+enum ESupportedEndReasons
+{
+	UNDEFINED = -1,
+	TIMELIMIT = -2,
+	SCORELIMIT = -3,
+	DRAW = -4,
+	SERVER_RESTART = -5,
+
+	EDITOR_NEUTRAL = 1000,
+	EDITOR_FACTION_NEUTRAL = 1001,
+	EDITOR_FACTION_VICTORY = 1002,
+	//EDITOR_FACTION_DEFEAT = 1003,
+	EDITOR_FACTION_DRAW = 1004
 }
