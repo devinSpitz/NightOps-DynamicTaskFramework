@@ -58,10 +58,17 @@ class NO_SCR_EditorTask : SCR_EditorTask
     protected ref ScriptInvoker m_OnFailTask = new ScriptInvoker();
     protected ref ScriptInvoker m_OnAssignTask = new ScriptInvoker();
     protected ref ScriptInvoker m_OnCreateTask = new ScriptInvoker();
+	event protected void OnFinish();
+	event protected void OnAssignTask();
+	event protected void OnCreateTask();
+	event protected void OnFailTask();
 	
 	override void EOnInit(IEntity owner)
 	{
-		
+		m_OnFinishTask.Insert(OnFinish);
+		m_OnFailTask.Insert(OnFailTask);
+		m_OnAssignTask.Insert(OnAssignTask);
+		m_OnCreateTask.Insert(OnCreateTask);
 		super.EOnInit(owner);
 		Owner = owner;
 		
