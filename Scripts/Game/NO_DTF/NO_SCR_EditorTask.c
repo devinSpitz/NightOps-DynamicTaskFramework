@@ -191,6 +191,15 @@ class NO_SCR_EditorTask : SCR_EditorTask
 			
 			
 			TaskState = TriggerType.Assign;
+			foreach(NO_SCR_EditorTask task : manager.m_aTasks)
+			{
+				if(task!=this && task.TaskState == TriggerType.Assign)
+				{
+					task.TaskState = TriggerType.Create;
+				}
+			}
+			
+			
 			Print("changed task "+TaskState.ToString());
 			
 			foreach(int playerId  : players)
