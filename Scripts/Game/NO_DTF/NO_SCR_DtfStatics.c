@@ -38,10 +38,10 @@ enum WhenTypeTrigger
 };
 enum TriggerType
 {
-	Assign,
-	Fail,
-	Finish,
-	Create
+	Assign = 1,
+	Fail = 2,
+	Finish = 3,
+	Create = 4
 };
 enum ActivateType
 {

@@ -45,7 +45,10 @@ class NO_SCR_EditorTask : SCR_EditorTask
 	[Attribute("USSR", UIWidgets.EditBox, desc: "Key of winning faction, or player faction if draw.", category: "Game Over")]
 	protected string m_sWinningFactionKeyFail;
 	
+	
+	[RplProp()]
 	TriggerType TaskState = null;
+	
 	RplComponent m_pRplComponent;
 	IEntity Owner;
 	private bool alreadyAssigned = false;
@@ -54,10 +57,10 @@ class NO_SCR_EditorTask : SCR_EditorTask
 	BaseWorld world;
 	
 	
-    protected ref ScriptInvoker m_OnFinishTask = new ScriptInvoker();
-    protected ref ScriptInvoker m_OnFailTask = new ScriptInvoker();
-    protected ref ScriptInvoker m_OnAssignTask = new ScriptInvoker();
-    protected ref ScriptInvoker m_OnCreateTask = new ScriptInvoker();
+    protected ref ScriptInvoker m_OnFinishTask =  new ref ScriptInvoker();
+    protected ref ScriptInvoker m_OnFailTask =  new ref ScriptInvoker();
+    protected ref ScriptInvoker m_OnAssignTask =  new ref ScriptInvoker();
+    protected ref ScriptInvoker m_OnCreateTask = new ref ScriptInvoker();
 	
 	event protected void OnFinish();
 	event protected void OnFinishTask();
@@ -111,7 +114,11 @@ class NO_SCR_EditorTask : SCR_EditorTask
 		
 		
 		IEntity Parent = GetParent();
-		if(!Parent) Debug.Error("NO_SCR_TaskTrigger cannot hook to the Parent so its not a child of it!");
+		if(!Parent) 
+		{
+			Print("NO_SCR_TaskTrigger cannot hook to the Parent so its not a child of it!");
+			return;
+		}
 		
 		NO_SCR_EditorTask parentTask = NO_SCR_EditorTask.Cast(Parent);
 		if(parentTask&&Owner!=null)
@@ -124,15 +131,46 @@ class NO_SCR_EditorTask : SCR_EditorTask
 	
 	void SetJIPState()
 	{
+		Print("Start JIP");
 		if(TaskState)
-		ChangeStateOfTask(TaskState);
+		{
+			
+				Print("after if in JIP");
+			if(TaskState == TriggerType.Assign)
+			{
+				Print("Assign JIP");
+				ChangeStateOfTask(TriggerType.Create,true);
+				ChangeStateOfTask(TriggerType.Assign,true);
+			}
+			else if(TaskState == TriggerType.Create)
+			{
+				Print("Create JIP");
+				ChangeStateOfTask(TriggerType.Create,true);
+			}
+			else if(TaskState == TriggerType.Finish)
+			{
+				Print("Finish JIP");
+				ChangeStateOfTask(TriggerType.Create,true);
+				ChangeStateOfTask(TriggerType.Assign,true);
+				ChangeStateOfTask(TriggerType.Finish,true);
+			}
+			else if(TaskState == TriggerType.Fail)
+			{
+				Print("Fail JIP");
+				ChangeStateOfTask(TriggerType.Create,true);
+				ChangeStateOfTask(TriggerType.Assign,true);
+				ChangeStateOfTask(TriggerType.Fail,true);
+			}
+		}
+		
+		Print("end JIP "+TaskState.ToString());
 	}
 	
-	void ChangeStateOfTask(TriggerType m_tTriggerType)
+	void ChangeStateOfTask(TriggerType m_tTriggerType,bool forceClient = false)
 	{
 		
 		if(!m_pRplComponent) return;
-		if(!m_pRplComponent.IsMaster()) return;
+		if(!m_pRplComponent.IsMaster() && !forceClient ) return;
 		NO_SCR_EditorTask ParentTask = NO_SCR_EditorTask.Cast(this);
 		if(!ParentTask) Debug.Error("NO_SCR_EditorTask cannot hook to the Editor Task so its not a child of it!");
 		
@@ -147,38 +185,50 @@ class NO_SCR_EditorTask : SCR_EditorTask
 		NO_SCR_TaskManager manager = NO_SCR_TaskManager.Cast(GetTaskManager());
 		if(m_tTriggerType==TriggerType.Assign)
 		{
+			
+			if(TaskState!=TriggerType.Create) 
+				manager.SetTaskFaction(ParentTask,game.GetFactionManager().GetFactionByKey(ParentTask.m_faction));
+			
+			
+			TaskState = TriggerType.Assign;
+			Print("changed task "+TaskState.ToString());
+			
 			foreach(int playerId  : players)
 			{
 				auto taskExecutor = SCR_BaseTaskExecutor.GetTaskExecutorByID(playerId);
 				manager.AssignTask(ParentTask,taskExecutor,manager.m_bShowGMMessageWhenAssigningTasks);
 			}
-			TaskState = TriggerType.Assign;
 			m_OnAssignTask.Invoke();
 			
 		}
 		else if(m_tTriggerType==TriggerType.Fail)
 		{
-			manager.FailTask(ParentTask);
+			
 			TaskState = TriggerType.Fail;
+			Print("changed task "+TaskState.ToString());
+			manager.FailTask(ParentTask);
 			GameOverLose();
 			CreateNewTasksLose();
 			m_OnFinishTask.Invoke();
 		}
 		else if(m_tTriggerType==TriggerType.Finish)
 		{
-			manager.FinishTask(ParentTask);
 			TaskState = TriggerType.Finish;
+			Print("changed task "+TaskState.ToString());
+			manager.FinishTask(ParentTask);
 			GameOverWin();
 			CreateNewTasksWin();
 			m_OnFailTask.Invoke();
 		}
 		else if(m_tTriggerType==TriggerType.Create)
 		{
-			manager.SetTaskFaction(ParentTask,game.GetFactionManager().GetFactionByKey(ParentTask.m_faction));
 			TaskState = TriggerType.Create;
+			Print("changed task "+TaskState.ToString());
+			manager.SetTaskFaction(ParentTask,game.GetFactionManager().GetFactionByKey(ParentTask.m_faction));
 			m_OnCreateTask.Invoke();
 		}
 		
+		Replication.BumpMe();
 		
 	}
 	

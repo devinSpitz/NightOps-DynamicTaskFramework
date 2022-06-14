@@ -345,6 +345,10 @@ NO_SCR_TaskManager TaskManager : "{2DF590FC1A531940}Prefabs/NO_DTF/TaskManager.e
  coords 98.193 9.931 149.375
  {
   NO_SCR_EditorTask : "{231FF93369E30084}Prefabs/NO_DTF/MultiTask.et" {
+   components {
+    RplComponent "{599690AC0DF6829F}" {
+    }
+   }
    coords 0 0 0
    m_bAssignToFactionOnStart 0
    {
@@ -352,6 +356,7 @@ NO_SCR_TaskManager TaskManager : "{2DF590FC1A531940}Prefabs/NO_DTF/TaskManager.e
      {
       coords -39.658 0 57.483
       DrawShape 1
+      m_bOneTimeTrigger 0
      }
      {
       coords -33.542 0 91.021
@@ -371,6 +376,10 @@ NO_SCR_TaskManager TaskManager : "{2DF590FC1A531940}Prefabs/NO_DTF/TaskManager.e
     }
     $grp NO_SCR_EditorTask : "{82EC0462F27F5221}Prefabs/NO_DTF/SingleTask.et" {
      {
+      components {
+       RplComponent "{59953E01C8D3BE05}" {
+       }
+      }
       coords -60.074 0 32.475
       {
        NO_SCR_TaskTrigger : "{355FA603A4370198}Prefabs/NO_DTF/Triggers/TaskTrigger.et" {
@@ -381,6 +390,10 @@ NO_SCR_TaskManager TaskManager : "{2DF590FC1A531940}Prefabs/NO_DTF/TaskManager.e
       }
      }
      {
+      components {
+       RplComponent "{59953E01C8D3BE05}" {
+       }
+      }
       coords -84.693 0 34.452
       {
        NO_SCR_TaskTrigger : "{355FA603A4370198}Prefabs/NO_DTF/Triggers/TaskTrigger.et" {
@@ -397,6 +410,10 @@ NO_SCR_TaskManager TaskManager : "{2DF590FC1A531940}Prefabs/NO_DTF/TaskManager.e
    }
   }
   NO_SCR_EditorTask : "{501E003D39D4E993}Prefabs/NO_DTF/AreaFactionControlTask.et" {
+   components {
+    RplComponent "{59953E01C8D3BE05}" {
+    }
+   }
    coords 0.633 0.87 97.837
    m_sName "FactionTest"
    {
