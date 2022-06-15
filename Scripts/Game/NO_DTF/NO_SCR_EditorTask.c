@@ -184,7 +184,7 @@ class NO_SCR_EditorTask : SCR_EditorTask
 		if(m_tTriggerType==TriggerType.Assign)
 		{
 			
-			if(TaskState!=TriggerType.Create) 
+			if(!TaskState || TaskState!=TriggerType.Create) 
 				manager.SetTaskFaction(ParentTask,game.GetFactionManager().GetFactionByKey(ParentTask.m_faction));
 			
 			
