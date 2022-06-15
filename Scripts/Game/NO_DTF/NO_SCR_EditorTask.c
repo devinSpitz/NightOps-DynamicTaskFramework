@@ -56,11 +56,7 @@ class NO_SCR_EditorTask : SCR_EditorTask
 	ArmaReforgerScripted game;
 	BaseWorld world;
 	
-	
-    protected ref ScriptInvoker m_OnFinishTask =  new ref ScriptInvoker();
-    protected ref ScriptInvoker m_OnFailTask =  new ref ScriptInvoker();
-    protected ref ScriptInvoker m_OnAssignTask =  new ref ScriptInvoker();
-    protected ref ScriptInvoker m_OnCreateTask = new ref ScriptInvoker();
+
 	
 	event protected void OnFinish();
 	event protected void OnFinishTask();
@@ -68,6 +64,7 @@ class NO_SCR_EditorTask : SCR_EditorTask
 	event protected void OnCreateTask();
 	event protected void OnFailTask();
 	
+
 	override void EOnInit(IEntity owner)
 	{
 		super.EOnInit(owner);
@@ -100,11 +97,12 @@ class NO_SCR_EditorTask : SCR_EditorTask
 		} 
 		
 		if(!m_pRplComponent.IsMaster()) return;
-			
-		m_OnFinishTask.Insert(OnFinishTask);
-		m_OnFailTask.Insert(OnFailTask);
-		m_OnAssignTask.Insert(OnAssignTask);
-		m_OnCreateTask.Insert(OnCreateTask);
+		
+		
+		manager.s_OnTaskFinished.Insert(OnFinishTask);
+		manager.s_OnTaskFailed.Insert(OnFailTask);
+		manager.s_OnTaskAssigned.Insert(OnAssignTask);
+		manager.s_OnTaskFactionAssigned.Insert(OnCreateTask);
 				
 		if(m_bAssignToFactionOnStart) 
 		{
@@ -207,7 +205,6 @@ class NO_SCR_EditorTask : SCR_EditorTask
 				auto taskExecutor = SCR_BaseTaskExecutor.GetTaskExecutorByID(playerId);
 				manager.AssignTask(ParentTask,taskExecutor,manager.m_bShowGMMessageWhenAssigningTasks);
 			}
-			m_OnAssignTask.Invoke();
 			
 		}
 		else if(m_tTriggerType==TriggerType.Fail)
@@ -218,7 +215,6 @@ class NO_SCR_EditorTask : SCR_EditorTask
 			manager.FailTask(ParentTask);
 			GameOverLose();
 			CreateNewTasksLose();
-			m_OnFinishTask.Invoke();
 		}
 		else if(m_tTriggerType==TriggerType.Finish)
 		{
@@ -227,14 +223,12 @@ class NO_SCR_EditorTask : SCR_EditorTask
 			manager.FinishTask(ParentTask);
 			GameOverWin();
 			CreateNewTasksWin();
-			m_OnFailTask.Invoke();
 		}
 		else if(m_tTriggerType==TriggerType.Create)
 		{
 			TaskState = TriggerType.Create;
 			Print("changed task "+TaskState.ToString());
 			manager.SetTaskFaction(ParentTask,game.GetFactionManager().GetFactionByKey(ParentTask.m_faction));
-			m_OnCreateTask.Invoke();
 		}
 		
 		Replication.BumpMe();
