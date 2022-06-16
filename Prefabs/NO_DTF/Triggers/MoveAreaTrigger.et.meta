@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{246978CC9E481FD6}Prefabs/NO_DTF/Triggers/MoveAreaTrigger.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

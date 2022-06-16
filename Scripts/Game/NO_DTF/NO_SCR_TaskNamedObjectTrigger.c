@@ -142,9 +142,8 @@ class NO_SCR_TaskNamedObjectTriggerComponent : ScriptComponent
 				Print("wasAlive");
 				wasAlive = true;
 			}
-			else if(wasAlive && !InTrigger)
+			else if(wasAlive && (!InTrigger || !IsAlive(InTrigger)))
 			{
-				
 				Print("Finished Task");
 				//SCR_ChimeraCharacter Died
 				alreadyTriggered = true;

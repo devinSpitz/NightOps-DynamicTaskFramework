@@ -26,6 +26,9 @@ class NO_SCR_TaskTrigger : SCR_BaseTriggerEntity
 	[Attribute("1", UIWidgets.CheckBox, "Should the trigger only work one time?", category: "TaskManager:" )]
 	bool m_bOneTimeTrigger;
 	
+	[Attribute("1", UIWidgets.CheckBox, "Only player are counted", category: "TaskManager:" )]
+	bool m_bPlayerOnly;
+	
 	private ref array<IEntity> playerInTrigger = new array<IEntity>();
 	private RplComponent m_pRplComponent;
 	private IEntity Owner;
@@ -44,7 +47,15 @@ class NO_SCR_TaskTrigger : SCR_BaseTriggerEntity
         if (!IsAlive(cc)) return false; // If the entity is dead, filter it out
 		if(m_eWhenTypeTrigger == WhenTypeTrigger.AnyChimera) return true; // Any chimera character should trigger
         if (cc.GetFactionKey() != ParentTask.m_faction) return false; // If the entity does not have the Faction key of USSR, filter it out
+        if (!IsPlayer(ent) && m_bPlayerOnly) return false; // If the entity does not have the Faction key of USSR, filter it out
+		
         return true; // Otherwise, include it!
+    }
+	
+	bool IsPlayer(IEntity ent) 
+    {
+      int playerId = GetGame().GetPlayerManager().GetPlayerIdFromControlledEntity(ent); 
+      return playerId > 0;
     }
 	
 	override void OnInit(IEntity owner)

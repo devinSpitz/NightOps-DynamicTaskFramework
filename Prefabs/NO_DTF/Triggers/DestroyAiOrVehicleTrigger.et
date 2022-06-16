@@ -1,0 +1,14 @@
+GenericEntity {
+ ID "59A0F6DCA9BB8C5E"
+ components {
+  Hierarchy "{59A0F6DCA0C8FAA9}" {
+  }
+  NO_SCR_TaskNamedObjectTriggerComponent "{59A0F6DCA0C8FAE0}" {
+   m_tTriggerType Finish
+   m_sTriggerNamedObject "BTR70_Base1"
+  }
+  RplComponent "{59A0F6DCA0C8FAE3}" {
+  }
+ }
+ coords 98.151 10.001 343.865
+}

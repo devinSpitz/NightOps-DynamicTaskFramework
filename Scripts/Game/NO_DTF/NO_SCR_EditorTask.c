@@ -13,7 +13,6 @@ class NO_SCR_EditorTask : SCR_EditorTask
 	[Attribute("1", UIWidgets.CheckBox, "Assign the task to its faction from the beginning", category: "TaskManager:")]
 	bool m_bAssignToFactionOnStart;	
 	
-	
 	[Attribute("", UIWidgets.EditBox, "When set and the a task is assigned as well as the TaskManager has the checkbox set the marker will be on the position of the ObjectName you entered here!", category: "TaskManager:" )]
 	string m_sAdditionalMarkerPosition;
 	
@@ -129,39 +128,31 @@ class NO_SCR_EditorTask : SCR_EditorTask
 	
 	void SetJIPState()
 	{
-		Print("Start JIP");
 		if(TaskState)
 		{
-			
-				Print("after if in JIP");
 			if(TaskState == TriggerType.Assign)
 			{
-				Print("Assign JIP");
 				ChangeStateOfTask(TriggerType.Create,true);
 				ChangeStateOfTask(TriggerType.Assign,true);
 			}
 			else if(TaskState == TriggerType.Create)
 			{
-				Print("Create JIP");
 				ChangeStateOfTask(TriggerType.Create,true);
 			}
 			else if(TaskState == TriggerType.Finish)
 			{
-				Print("Finish JIP");
 				ChangeStateOfTask(TriggerType.Create,true);
 				ChangeStateOfTask(TriggerType.Assign,true);
 				ChangeStateOfTask(TriggerType.Finish,true);
 			}
 			else if(TaskState == TriggerType.Fail)
 			{
-				Print("Fail JIP");
 				ChangeStateOfTask(TriggerType.Create,true);
 				ChangeStateOfTask(TriggerType.Assign,true);
 				ChangeStateOfTask(TriggerType.Fail,true);
 			}
 		}
 		
-		Print("end JIP "+TaskState.ToString());
 	}
 	
 	void ChangeStateOfTask(TriggerType m_tTriggerType,bool forceClient = false)

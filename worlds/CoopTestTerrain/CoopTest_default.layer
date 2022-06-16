@@ -254,3 +254,6 @@ SCR_WaterZoneEntity OceanWaterZone {
  m_Depth 500
  m_IsOcean 1
 }
+Vehicle BTR70_Base1 : "{1C5FE7B7FF49BB8D}Prefabs/Vehicles/Wheeled/BTR70/BTR70_Base.et" {
+ coords 95.819 10.001 310.093
+}

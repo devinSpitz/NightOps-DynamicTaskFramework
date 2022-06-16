@@ -7,6 +7,9 @@ class NO_SCR_TaskMarkerComponent : ScriptComponent
 {
 	[Attribute("1.0", UIWidgets.Range, desc: "Height above the task location the waypoint should appear.")]
 	protected float m_fWaypointHeight;
+	[Attribute("0.898 0.9541 0.184 1", UIWidgets.ColorPicker)]
+	protected ref Color m_Color;
+	
 
 	protected ResourceName m_sBuildingIconImageset = "{F7E8D4834A3AFF2F}UI/Imagesets/Conflict/conflict-icons-bw.imageset";
 	protected ImageWidget m_wWaypoint;
@@ -83,14 +86,14 @@ class NO_SCR_TaskMarkerComponent : ScriptComponent
 		{
 			m_wWaypoint.SetOpacity(0);
 			m_wWaypoint.LoadImageFromSet(0, m_sBuildingIconImageset, "USSR_Base_Main_Select");
-			m_wWaypoint.SetColor(Color.Yellow);
+			m_wWaypoint.SetColor(m_Color);
 			FrameSlot.SetSize(m_wWaypoint, 64, 64);
 		}
 
 		if (m_wWaypointDistance)
 		{
 			m_wWaypointDistance.SetOpacity(0);
-			m_wWaypointDistance.SetColor(Color.Yellow);
+			m_wWaypointDistance.SetColor(m_Color);
 		}
 
 		m_bHasInitilised = true;
