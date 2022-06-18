@@ -106,7 +106,7 @@ class NO_SCR_EditorTask : SCR_EditorTask
 		if(m_bAssignToFactionOnStart) 
 		{
 			ChangeStateOfTask(TriggerType.Create);
-			ChangeStateOfTask(TriggerType.Assign);
+			GetGame().GetCallqueue().CallLater(ChangeStateOfTask, 1, false, TriggerType.Assign);
 		}
 		
 		
@@ -132,8 +132,9 @@ class NO_SCR_EditorTask : SCR_EditorTask
 		{
 			if(TaskState == TriggerType.Assign)
 			{
+				
 				ChangeStateOfTask(TriggerType.Create,true);
-				ChangeStateOfTask(TriggerType.Assign,true);
+				GetGame().GetCallqueue().CallLater(ChangeStateOfTask, 1, false, TriggerType.Assign,true);
 			}
 			else if(TaskState == TriggerType.Create)
 			{
@@ -142,14 +143,14 @@ class NO_SCR_EditorTask : SCR_EditorTask
 			else if(TaskState == TriggerType.Finish)
 			{
 				ChangeStateOfTask(TriggerType.Create,true);
-				ChangeStateOfTask(TriggerType.Assign,true);
-				ChangeStateOfTask(TriggerType.Finish,true);
+				GetGame().GetCallqueue().CallLater(ChangeStateOfTask, 1, false, TriggerType.Assign,true);
+				GetGame().GetCallqueue().CallLater(ChangeStateOfTask, 2, false, TriggerType.Finish,true);
 			}
 			else if(TaskState == TriggerType.Fail)
 			{
 				ChangeStateOfTask(TriggerType.Create,true);
-				ChangeStateOfTask(TriggerType.Assign,true);
-				ChangeStateOfTask(TriggerType.Fail,true);
+				GetGame().GetCallqueue().CallLater(ChangeStateOfTask, 1, false, TriggerType.Assign,true);
+				GetGame().GetCallqueue().CallLater(ChangeStateOfTask, 2, false, TriggerType.Fail,true);
 			}
 		}
 		
@@ -176,7 +177,12 @@ class NO_SCR_EditorTask : SCR_EditorTask
 		{
 			
 			if(!TaskState || TaskState!=TriggerType.Create) 
-				manager.SetTaskFaction(ParentTask,game.GetFactionManager().GetFactionByKey(ParentTask.m_faction));
+			{
+				ChangeStateOfTask(TriggerType.Create,forceClient);
+				GetGame().GetCallqueue().CallLater(ChangeStateOfTask, 1, false, TriggerType.Assign,forceClient);
+				return;
+			}
+				
 			
 			
 			TaskState = TriggerType.Assign;
