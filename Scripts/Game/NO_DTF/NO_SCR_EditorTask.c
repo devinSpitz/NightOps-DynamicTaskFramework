@@ -6,8 +6,6 @@ class NO_SCR_EditorTaskClass: SCR_EditorTaskClass
 //------------------------------------------------------------------------------------------------
 class NO_SCR_EditorTask : SCR_EditorTask
 {	
-	
-
 	ref array<NO_SCR_EditorTask> m_aChildren = new array<NO_SCR_EditorTask>();
 	[Attribute("USSR", UIWidgets.EditBox, "Faction is to ask whitch fraction can activeate the trigger", category: "TaskManager:")]
 	FactionKey m_faction;	
@@ -19,6 +17,7 @@ class NO_SCR_EditorTask : SCR_EditorTask
 	[Attribute("", UIWidgets.EditBox, "When set and the a task is assigned as well as the TaskManager has the checkbox set the marker will be on the position of the ObjectName you entered here!", category: "TaskManager:" )]
 	string m_sAdditionalMarkerPosition;
 	
+<<<<<<< HEAD
 	[Attribute("", UIWidgets.EditBox, "Add names of tasks to be created when Task is finished.", category: "TaskManager:" )]
 	ref array<string> m_sCreateTaskNamesSuccess;
 	
@@ -47,6 +46,10 @@ class NO_SCR_EditorTask : SCR_EditorTask
 	[Attribute("USSR", UIWidgets.EditBox, desc: "Key of winning faction, or player faction if draw.", category: "Game Over")]
 	protected string m_sWinningFactionKeyFail;
 	
+=======
+
+
+>>>>>>> main
 	TriggerType TaskState = null;
 	RplComponent m_pRplComponent;
 	IEntity Owner;
@@ -136,13 +139,13 @@ class NO_SCR_EditorTask : SCR_EditorTask
 		array<int> players = {};
 		playerManager.GetAllPlayers(players);
 		
-		SCR_BaseTaskManager manager = NO_SCR_TaskManager.Cast(GetTaskManager());
+		NO_SCR_TaskManager manager = NO_SCR_TaskManager.Cast(GetTaskManager());
 		if(m_tTriggerType==TriggerType.Assign)
 		{
 			foreach(int playerId  : players)
 			{
 				auto taskExecutor = SCR_BaseTaskExecutor.GetTaskExecutorByID(playerId);
-				manager.AssignTask(ParentTask,taskExecutor,true);
+				manager.AssignTask(ParentTask,taskExecutor,manager.m_bShowGMMessageWhenAssigningTasks);
 			}
 			TaskState = TriggerType.Assign;
 			
