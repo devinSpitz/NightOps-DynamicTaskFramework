@@ -1,0 +1,10 @@
+NO_SCR_TaskEventHandler {
+ ID "59A56D073E1E4663"
+ components {
+  Hierarchy "{59A56D070EAF588A}" {
+  }
+  RplComponent "{59A56D070CD4CC4C}" {
+  }
+ }
+ coords -53.206 -0.8 -21.068
+}

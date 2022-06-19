@@ -168,11 +168,9 @@ class NO_SCR_TaskTrigger : SCR_BaseTriggerEntity
 				return;
 		}
 		
-		
 		ParentTask.ChangeStateOfTask(m_tTriggerType);
 		alreadyTriggered = true;
 	}
-
 	
 	
 }

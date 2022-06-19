@@ -378,6 +378,13 @@ NO_SCR_TaskManager TaskManager : "{2DF590FC1A531940}Prefabs/NO_DTF/TaskManager.e
       m_tTriggerType Fail
      }
     }
+    NO_SCR_TaskEventHandler EventHandler : "{6215DAC2B0860A62}Prefabs/NO_DTF/TaskEventHandler.et" {
+     coords 0 0 0
+     OnCreateTask ""\
+     "		/* code here */"\
+     "		Print(\"Did The Event\");"\
+     "	"
+    }
     $grp NO_SCR_EditorTask : "{82EC0462F27F5221}Prefabs/NO_DTF/SingleTask.et" {
      {
       components {
@@ -423,7 +430,7 @@ NO_SCR_TaskManager TaskManager : "{2DF590FC1A531940}Prefabs/NO_DTF/TaskManager.e
     }
    }
   }
-  NO_SCR_EditorTask : "{501E003D39D4E993}Prefabs/NO_DTF/AreaFactionControlTask.et" {
+  NO_SCR_EditorTask faction : "{501E003D39D4E993}Prefabs/NO_DTF/AreaFactionControlTask.et" {
    components {
     RplComponent "{59953E01C8D3BE05}" {
     }
