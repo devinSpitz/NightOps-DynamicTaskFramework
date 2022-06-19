@@ -347,6 +347,7 @@ NO_SCR_TaskManager TaskManager : "{2DF590FC1A531940}Prefabs/NO_DTF/TaskManager.e
   }
  }
  coords 98.193 9.931 149.375
+ m_Dummyfaction "US"
  {
   NO_SCR_EditorTask : "{231FF93369E30084}Prefabs/NO_DTF/MultiTask.et" {
    components {
@@ -377,13 +378,6 @@ NO_SCR_TaskManager TaskManager : "{2DF590FC1A531940}Prefabs/NO_DTF/TaskManager.e
       DrawShape 1
       m_tTriggerType Fail
      }
-    }
-    NO_SCR_TaskEventHandler EventHandler : "{6215DAC2B0860A62}Prefabs/NO_DTF/TaskEventHandler.et" {
-     coords 0 0 0
-     OnCreateTask ""\
-     "		/* code here */"\
-     "		Print(\"Did The Event\");"\
-     "	"
     }
     $grp NO_SCR_EditorTask : "{82EC0462F27F5221}Prefabs/NO_DTF/SingleTask.et" {
      {

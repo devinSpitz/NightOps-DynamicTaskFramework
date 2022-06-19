@@ -97,6 +97,7 @@ class NO_SCR_EditorTask : SCR_EditorTask
 		if(!m_pRplComponent.IsMaster()) return;
 		
 		
+		manager.SetTaskFaction(this,GetGame().GetFactionManager().GetFactionByKey(realManager.m_Dummyfaction));
 				
 		if(m_bAssignToFactionOnStart) 
 		{
@@ -117,6 +118,7 @@ class NO_SCR_EditorTask : SCR_EditorTask
 		{
 			parentTask.m_aChildren.Insert(this);
 		}
+		
 		
 	}
 	
@@ -188,7 +190,7 @@ class NO_SCR_EditorTask : SCR_EditorTask
 					task.TaskState = TriggerType.Create;
 				}
 			}
-			
+		
 			
 			Print("changed task "+TaskState.ToString());
 			
@@ -197,6 +199,7 @@ class NO_SCR_EditorTask : SCR_EditorTask
 				auto taskExecutor = SCR_BaseTaskExecutor.GetTaskExecutorByID(playerId);
 				manager.AssignTask(ParentTask,taskExecutor,manager.m_bShowGMMessageWhenAssigningTasks);
 			}
+			
 			s_OnTaskAssign.Invoke();
 			
 		}
@@ -209,6 +212,7 @@ class NO_SCR_EditorTask : SCR_EditorTask
 			GameOverLose();
 			CreateNewTasksLose();
 			s_OnTaskFail.Invoke();
+			manager.m_aTasks.RemoveItem(ParentTask);
 		}
 		else if(m_tTriggerType==TriggerType.Finish)
 		{
@@ -218,6 +222,7 @@ class NO_SCR_EditorTask : SCR_EditorTask
 			GameOverWin();
 			CreateNewTasksWin();
 			s_OnTaskComplete.Invoke();
+			manager.m_aTasks.RemoveItem(ParentTask);
 		}
 		else if(m_tTriggerType==TriggerType.Create)
 		{
@@ -230,6 +235,7 @@ class NO_SCR_EditorTask : SCR_EditorTask
 		Replication.BumpMe();
 		
 	}
+	
 	
 	bool IsBadTask(bool m_allowFailedTasks)
 	{

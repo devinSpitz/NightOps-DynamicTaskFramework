@@ -10,7 +10,8 @@ class NO_SCR_TaskManager : SCR_BaseTaskManager
 	[Attribute("0", UIWidgets.CheckBox, "Show that the GM has assigned the Tasks!", category: "TaskManager:")]
 	bool m_bShowGMMessageWhenAssigningTasks;	
 	
-	
+	[Attribute("USSR", UIWidgets.EditBox, "Dummy Faction for pre create the task for no error in GM", category: "TaskManager:")]
+	FactionKey m_Dummyfaction;	
 	
 	ref array<NO_SCR_EditorTask> m_aTasks = new ref array<NO_SCR_EditorTask>();
 	protected override void EOnInit(IEntity owner)
