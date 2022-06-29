@@ -7,6 +7,8 @@ class NO_SCR_EditorTaskClass: SCR_EditorTaskClass
 class NO_SCR_EditorTask : SCR_EditorTask
 {	
 	ref array<NO_SCR_EditorTask> m_aChildren = new array<NO_SCR_EditorTask>();
+	[Attribute("1", UIWidgets.CheckBox, desc: "Activate Task Marker For This Task", category: "TaskManager:")]
+	bool m_bActivateTaskMarkerForThisTask;
 	[Attribute("USSR", UIWidgets.EditBox, "Faction is to ask whitch fraction can activeate the trigger", category: "TaskManager:")]
 	FactionKey m_faction;	
 	
@@ -43,6 +45,8 @@ class NO_SCR_EditorTask : SCR_EditorTask
 	
 	[Attribute("USSR", UIWidgets.EditBox, desc: "Key of winning faction, or player faction if draw.", category: "Game Over")]
 	protected string m_sWinningFactionKeyFail;
+	
+	
 	
 	
 	[RplProp()]
@@ -181,13 +185,14 @@ class NO_SCR_EditorTask : SCR_EditorTask
 			}
 				
 			
-			
+			NO_SCR_EditorTask unassignTask;
 			TaskState = TriggerType.Assign;
 			foreach(NO_SCR_EditorTask task : manager.m_aTasks)
 			{
 				if(task!=this && task.TaskState && task.TaskState == TriggerType.Assign)
 				{
 					task.TaskState = TriggerType.Create;
+					unassignTask=task;
 				}
 			}
 		
@@ -197,6 +202,10 @@ class NO_SCR_EditorTask : SCR_EditorTask
 			foreach(int playerId  : players)
 			{
 				auto taskExecutor = SCR_BaseTaskExecutor.GetTaskExecutorByID(playerId);
+				if(unassignTask)
+				{
+					manager.UnassignTask(unassignTask,taskExecutor,manager.m_bShowGMMessageWhenAssigningTasks);
+				}
 				manager.AssignTask(ParentTask,taskExecutor,manager.m_bShowGMMessageWhenAssigningTasks);
 			}
 			

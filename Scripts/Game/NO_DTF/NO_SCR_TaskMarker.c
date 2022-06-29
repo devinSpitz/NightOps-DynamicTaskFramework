@@ -103,7 +103,7 @@ class NO_SCR_TaskMarkerComponent : ScriptComponent
 	{
 		if (m_wWaypoint && m_bHasInitilised)
 		{
-			if (m_pCurrentWaypoint && m_bShowWaypoint)
+			if (m_pCurrentWaypoint && m_bShowWaypoint && m_pCurrentWaypoint.m_bActivateTaskMarkerForThisTask)
 			{
 				IEntity player = EntityUtils.GetPlayer();
 				if (!player) return;

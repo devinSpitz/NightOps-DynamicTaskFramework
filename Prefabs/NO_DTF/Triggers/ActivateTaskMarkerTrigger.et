@@ -1,0 +1,16 @@
+NO_SCR_ActivateTaskMarkerTrigger {
+ ID "59BB0A00A6F62635"
+ components {
+  Hierarchy "{59BB0A0353C10826}" {
+  }
+  RplComponent "{59BB0A0351B85865}" {
+  }
+ }
+ coords -62.735 -0.8 -13.056
+ TriggerShapeType Sphere
+ SphereRadius 10
+ DrawShape 0
+ TriggerActivationType "All changes"
+ PeriodicQueries 1
+ m_eActivateType Enter
+}
