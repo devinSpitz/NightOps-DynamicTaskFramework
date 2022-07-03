@@ -432,6 +432,7 @@ NO_SCR_TaskManager TaskManager : "{2DF590FC1A531940}Prefabs/NO_DTF/TaskManager.e
    coords 0.633 0.87 97.837
    m_sName "FactionTest"
    m_bActivateTaskMarkerForThisTask 0
+   m_bCreateOnStart 0
    {
     NO_SCR_FactionControlTrigger {
      ID "5996F7F9EBC16B54"
