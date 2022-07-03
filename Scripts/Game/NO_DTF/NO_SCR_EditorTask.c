@@ -10,6 +10,9 @@ class NO_SCR_EditorTask : SCR_EditorTask
 	[Attribute("USSR", UIWidgets.EditBox, "Faction is to ask whitch fraction can activeate the trigger", category: "TaskManager:")]
 	FactionKey m_faction;	
 	
+	[Attribute("1", UIWidgets.CheckBox, "Create the task from the beginning", category: "TaskManager:")]
+	bool m_bCreateTaskOnStart;	
+	
 	[Attribute("1", UIWidgets.CheckBox, "Assign the task to its faction from the beginning", category: "TaskManager:")]
 	bool m_bAssignToFactionOnStart;	
 	
@@ -102,11 +105,15 @@ class NO_SCR_EditorTask : SCR_EditorTask
 		manager.s_OnTaskFailed.Insert(OnFailTask);
 		manager.s_OnTaskAssigned.Insert(OnAssignTask);
 		manager.s_OnTaskFactionAssigned.Insert(OnCreateTask);
-				
-		if(m_bAssignToFactionOnStart) 
+		
+		if(m_bCreateTaskOnStart && !m_bAssignToFactionOnStart)
 		{
 			ChangeStateOfTask(TriggerType.Create);
-			GetGame().GetCallqueue().CallLater(ChangeStateOfTask, 1, false, TriggerType.Assign);
+		}
+		
+		if(m_bAssignToFactionOnStart) 
+		{
+			ChangeStateOfTask(TriggerType.Assign);
 		}
 		
 		
