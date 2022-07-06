@@ -356,6 +356,7 @@ NO_SCR_TaskManager TaskManager : "{2DF590FC1A531940}Prefabs/NO_DTF/TaskManager.e
    }
    coords 0 0 0
    m_bAssignToFactionOnStart 0
+   m_bFailOrCompleteTemporarly 1
    {
     $grp NO_SCR_TaskTrigger : "{355FA603A4370198}Prefabs/NO_DTF/Triggers/TaskTrigger.et" {
      {
@@ -367,6 +368,7 @@ NO_SCR_TaskManager TaskManager : "{2DF590FC1A531940}Prefabs/NO_DTF/TaskManager.e
       coords -33.542 0 91.021
       DrawShape 1
       m_tTriggerType Assign
+      m_bOneTimeTrigger 0
      }
      {
       coords -24.424 0 125.381
@@ -431,6 +433,8 @@ NO_SCR_TaskManager TaskManager : "{2DF590FC1A531940}Prefabs/NO_DTF/TaskManager.e
    }
    coords 0.633 0.87 97.837
    m_sName "FactionTest"
+   m_bNotifyAssignment 0
+   m_bNotifyUnassign 0
    m_bActivateTaskMarkerForThisTask 0
    {
     NO_SCR_FactionControlTrigger {
@@ -441,6 +445,7 @@ NO_SCR_TaskManager TaskManager : "{2DF590FC1A531940}Prefabs/NO_DTF/TaskManager.e
     NO_SCR_ActivateTaskMarkerTrigger : "{3373347AAD1398E8}Prefabs/NO_DTF/Triggers/ActivateTaskMarkerTrigger.et" {
      coords -21.643 0 -27.204
      DrawShape 1
+     m_bOneTimeTrigger 0
     }
    }
   }

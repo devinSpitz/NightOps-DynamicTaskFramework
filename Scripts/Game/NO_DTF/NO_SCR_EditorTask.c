@@ -7,13 +7,18 @@ class NO_SCR_EditorTaskClass: SCR_EditorTaskClass
 class NO_SCR_EditorTask : SCR_EditorTask
 {	
 	ref array<NO_SCR_EditorTask> m_aChildren = new array<NO_SCR_EditorTask>();
+	
 	[Attribute("1", UIWidgets.CheckBox, desc: "Activate Task Marker For This Task", category: "TaskManager:")]
+	
 	bool m_bActivateTaskMarkerForThisTask;
 	[Attribute("USSR", UIWidgets.EditBox, "Faction is to ask whitch fraction can activeate the trigger", category: "TaskManager:")]
 	FactionKey m_faction;	
 	
 	[Attribute("1", UIWidgets.CheckBox, "Assign the task to its faction from the beginning", category: "TaskManager:")]
 	bool m_bAssignToFactionOnStart;	
+	
+	[Attribute("0", UIWidgets.CheckBox,"Does fail or complete only temporarly so the task can be reused!", category: "TaskManager:")]
+	bool m_bFailOrCompleteTemporarly;
 	
 	[Attribute("", UIWidgets.EditBox, "When set and the a task is assigned as well as the TaskManager has the checkbox set the marker will be on the position of the ObjectName you entered here!", category: "TaskManager:" )]
 	string m_sAdditionalMarkerPosition;
@@ -25,7 +30,7 @@ class NO_SCR_EditorTask : SCR_EditorTask
 	ref array<string> m_sCreateTaskNamesFail;
 		
 	[Attribute("0", UIWidgets.CheckBox, "Assign the first task in the list", category: "Successor:")]
-	bool m_bAssignFirstTask;
+	bool m_bAssignFirstTask;	
 	
 	[Attribute("0", UIWidgets.CheckBox, desc: "End game when Task is finished", category: "Game Over")]
 	protected bool m_bEnableGameOverOnSuccess;
@@ -58,7 +63,7 @@ class NO_SCR_EditorTask : SCR_EditorTask
 	
 	ArmaReforgerScripted game;
 	BaseWorld world;
-	
+	NO_SCR_TaskManager realManager;
 
 	//Dont Insert stuff inside of this script!
 	ref ScriptInvoker s_OnTaskFail = new ref ScriptInvoker();
@@ -76,7 +81,7 @@ class NO_SCR_EditorTask : SCR_EditorTask
 		
 		//tell the taskmanager that we are here
 		SCR_BaseTaskManager manager = GetTaskManager();
-		NO_SCR_TaskManager realManager = NO_SCR_TaskManager.Cast(manager);
+		realManager = NO_SCR_TaskManager.Cast(manager);
 		realManager.m_aTasks.Insert(this);
 	
 		
@@ -217,7 +222,19 @@ class NO_SCR_EditorTask : SCR_EditorTask
 			
 			TaskState = TriggerType.Fail;
 			Print("changed task "+TaskState.ToString());
-			manager.FailTask(ParentTask);
+			if(!m_bFailOrCompleteTemporarly)
+			{
+				manager.FailTask(ParentTask);
+			}
+			else{
+				foreach(int playerId  : players)
+				{
+					auto taskExecutor = SCR_BaseTaskExecutor.GetTaskExecutorByID(playerId);
+					manager.UnassignTask(this,taskExecutor,manager.m_bShowGMMessageWhenAssigningTasks);
+				}
+				SCR_PopUpNotification.GetInstance().PopupMsg("Failed: "+m_sName, duration: 5);
+				manager.SetTaskFaction(this,GetGame().GetFactionManager().GetFactionByKey(realManager.m_Dummyfaction));
+			}
 			GameOverLose();
 			CreateNewTasksLose();
 			s_OnTaskFail.Invoke();
@@ -227,7 +244,20 @@ class NO_SCR_EditorTask : SCR_EditorTask
 		{
 			TaskState = TriggerType.Finish;
 			Print("changed task "+TaskState.ToString());
-			manager.FinishTask(ParentTask);
+			
+			if(!m_bFailOrCompleteTemporarly)
+			{
+				manager.FinishTask(ParentTask);
+			}
+			else{
+				foreach(int playerId  : players)
+				{
+					auto taskExecutor = SCR_BaseTaskExecutor.GetTaskExecutorByID(playerId);
+					manager.UnassignTask(this,taskExecutor,manager.m_bShowGMMessageWhenAssigningTasks);
+				}
+				SCR_PopUpNotification.GetInstance().PopupMsg("Completed: "+m_sName, duration: 5);
+				manager.SetTaskFaction(this,GetGame().GetFactionManager().GetFactionByKey(realManager.m_Dummyfaction));
+			}
 			GameOverWin();
 			CreateNewTasksWin();
 			s_OnTaskComplete.Invoke();
@@ -237,7 +267,7 @@ class NO_SCR_EditorTask : SCR_EditorTask
 		{
 			TaskState = TriggerType.Create;
 			Print("changed task "+TaskState.ToString());
-			manager.SetTaskFaction(ParentTask,game.GetFactionManager().GetFactionByKey(ParentTask.m_faction));
+			manager.SetTaskFaction(ParentTask,GetGame().GetFactionManager().GetFactionByKey(ParentTask.m_faction));
 			s_OnTaskCreate.Invoke();
 		}
 		

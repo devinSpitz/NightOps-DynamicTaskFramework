@@ -33,7 +33,7 @@ class NO_SCR_TaskManager : SCR_BaseTaskManager
 		// Reset faction on initial tasks for JIP (Authority only)
 		//ToDO Implement cache and rplProp
 		
-		if (!m_RplComponent.IsMaster())
+		if(m_RplComponent.IsMaster())
 		{
 			foreach(NO_SCR_EditorTask task : m_aTasks)
 			{
