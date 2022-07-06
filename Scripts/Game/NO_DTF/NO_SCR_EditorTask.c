@@ -11,8 +11,12 @@ class NO_SCR_EditorTask : SCR_EditorTask
 	[Attribute("1", UIWidgets.CheckBox, desc: "Activate Task Marker For This Task", category: "TaskManager:")]
 	
 	bool m_bActivateTaskMarkerForThisTask;
-	[Attribute("USSR", UIWidgets.EditBox, "Faction is to ask whitch fraction can activeate the trigger", category: "TaskManager:")]
+	
+	[Attribute("USSR", UIWidgets.EditBox, "Faction is to ask which fraction can activate the trigger", category: "TaskManager:")]
 	FactionKey m_faction;	
+	
+	[Attribute("1", UIWidgets.CheckBox, "Create the task from the beginning", category: "TaskManager:")]
+	bool m_bCreateOnStart;	
 	
 	[Attribute("1", UIWidgets.CheckBox, "Assign the task to its faction from the beginning", category: "TaskManager:")]
 	bool m_bAssignToFactionOnStart;	
@@ -107,11 +111,15 @@ class NO_SCR_EditorTask : SCR_EditorTask
 		
 		
 		manager.SetTaskFaction(this,GetGame().GetFactionManager().GetFactionByKey(realManager.m_Dummyfaction));
+		
+		if(m_bCreateOnStart && !m_bAssignToFactionOnStart)
+		{
+			ChangeStateOfTask(TriggerType.Create);
+		}
 				
 		if(m_bAssignToFactionOnStart) 
 		{
-			ChangeStateOfTask(TriggerType.Create);
-			GetGame().GetCallqueue().CallLater(ChangeStateOfTask, 1, false, TriggerType.Assign,false);
+			ChangeStateOfTask(TriggerType.Assign);
 		}
 		
 		

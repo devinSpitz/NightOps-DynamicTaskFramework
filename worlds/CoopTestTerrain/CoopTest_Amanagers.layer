@@ -436,6 +436,7 @@ NO_SCR_TaskManager TaskManager : "{2DF590FC1A531940}Prefabs/NO_DTF/TaskManager.e
    m_bNotifyAssignment 0
    m_bNotifyUnassign 0
    m_bActivateTaskMarkerForThisTask 0
+   m_bCreateOnStart 0
    {
     NO_SCR_FactionControlTrigger {
      ID "5996F7F9EBC16B54"
