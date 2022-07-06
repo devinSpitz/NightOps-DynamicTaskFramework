@@ -65,6 +65,8 @@ class NO_SCR_TaskMarkerComponent : ScriptComponent
 
 		if (locallyAssignedTask)
 		{
+			
+			Print("locallyAssignedTask");
 			m_pCurrentWaypoint = NO_SCR_EditorTask.Cast(locallyAssignedTask);
 			m_bShowWaypoint = true;
 		}
@@ -101,19 +103,32 @@ class NO_SCR_TaskMarkerComponent : ScriptComponent
 
 	override void EOnFrame(IEntity owner, float timeSlice)
 	{
+		
+		Print("Marker Start");
 		if (m_wWaypoint && m_bHasInitilised)
 		{
+			
+			Print("m_wWaypoint && m_bHasInitilised");
+			Print(m_pCurrentWaypoint);
+			Print(m_bShowWaypoint);
+			Print(m_pCurrentWaypoint.m_bActivateTaskMarkerForThisTask);
 			if (m_pCurrentWaypoint && m_bShowWaypoint && m_pCurrentWaypoint.m_bActivateTaskMarkerForThisTask)
 			{
+				
+				Print("m_pCurrentWaypoint && m_bShowWaypoint && m_pCurrentWaypoint.m_bActivateTaskMarkerForThisTask");
 				IEntity player = EntityUtils.GetPlayer();
 				if (!player) return;
 
+				
+				Print("here 1");
 				vector WPPos = m_pCurrentWaypoint.GetOrigin();
 				WPPos[1] = WPPos[1] + m_fWaypointHeight;
 				
 				if(m_pCurrentWaypoint.m_sAdditionalMarkerPosition != "" )
 				{
 					WPPos = world.FindEntityByName(m_pCurrentWaypoint.m_sAdditionalMarkerPosition).GetOrigin();
+					
+					Print("here 2");
 				}
 				
 				vector pos = workspace.ProjWorldToScreen(WPPos, world);
@@ -135,6 +150,7 @@ class NO_SCR_TaskMarkerComponent : ScriptComponent
 				else if (posY > winY || pos[2] < 0)
 					pos[1] = workspace.DPIUnscale(winY);
 
+				Print("here 3");
 				FrameSlot.SetPos(m_wWaypoint, pos[0], pos[1]);
 				FrameSlot.SetPos(m_wWaypointDistance, pos[0], pos[1]);
 				m_wWaypoint.SetOpacity(1);
@@ -143,6 +159,7 @@ class NO_SCR_TaskMarkerComponent : ScriptComponent
 			}
 			else
 			{
+				Print("else");
 				m_wWaypoint.SetOpacity(0);
 				m_wWaypointDistance.SetOpacity(0);
 			}

@@ -8,8 +8,7 @@ class NO_SCR_EditorTask : SCR_EditorTask
 {	
 	ref array<NO_SCR_EditorTask> m_aChildren = new array<NO_SCR_EditorTask>();
 	
-	[Attribute("1", UIWidgets.CheckBox, desc: "Activate Task Marker For This Task", category: "TaskManager:")]
-	
+	[Attribute("1", UIWidgets.CheckBox, desc: "Activate Task Marker For This Task", category: "TaskManager:"),RplProp()]
 	bool m_bActivateTaskMarkerForThisTask;
 	
 	[Attribute("USSR", UIWidgets.EditBox, "Faction is to ask which fraction can activate the trigger", category: "TaskManager:")]
@@ -300,6 +299,7 @@ class NO_SCR_EditorTask : SCR_EditorTask
 	
 	void MakePopUpEveryWhere(string message)
 	{
+		if(!m_pRplComponent.IsMaster()) return;
 		Rpc(RpcDoMessage, message);
 		ShowPopUpNotification(message);
 	}
