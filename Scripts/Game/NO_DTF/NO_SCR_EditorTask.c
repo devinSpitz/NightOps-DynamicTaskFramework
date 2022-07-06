@@ -15,7 +15,7 @@ class NO_SCR_EditorTask : SCR_EditorTask
 	[Attribute("USSR", UIWidgets.EditBox, "Faction is to ask which fraction can activate the trigger", category: "TaskManager:")]
 	FactionKey m_faction;	
 	
-	[Attribute("1", UIWidgets.CheckBox, "Create the task from the beginning", category: "TaskManager:")]
+	[Attribute("0", UIWidgets.CheckBox, "Create the task from the beginning", category: "TaskManager:")]
 	bool m_bCreateOnStart;	
 	
 	[Attribute("1", UIWidgets.CheckBox, "Assign the task to its faction from the beginning", category: "TaskManager:")]
@@ -240,7 +240,9 @@ class NO_SCR_EditorTask : SCR_EditorTask
 					auto taskExecutor = SCR_BaseTaskExecutor.GetTaskExecutorByID(playerId);
 					manager.UnassignTask(this,taskExecutor,manager.m_bShowGMMessageWhenAssigningTasks);
 				}
-				SCR_PopUpNotification.GetInstance().PopupMsg("Failed: "+m_sName, duration: 5);
+			
+				
+				MakePopUpEveryWhere("Failed: "+m_sName);
 				manager.SetTaskFaction(this,GetGame().GetFactionManager().GetFactionByKey(realManager.m_Dummyfaction));
 			}
 			GameOverLose();
@@ -260,10 +262,10 @@ class NO_SCR_EditorTask : SCR_EditorTask
 			else{
 				foreach(int playerId  : players)
 				{
-					auto taskExecutor = SCR_BaseTaskExecutor.GetTaskExecutorByID(playerId);
+					SCR_BaseTaskExecutor taskExecutor = SCR_BaseTaskExecutor.GetTaskExecutorByID(playerId);
 					manager.UnassignTask(this,taskExecutor,manager.m_bShowGMMessageWhenAssigningTasks);
 				}
-				SCR_PopUpNotification.GetInstance().PopupMsg("Completed: "+m_sName, duration: 5);
+				MakePopUpEveryWhere("Completed: "+m_sName);
 				manager.SetTaskFaction(this,GetGame().GetFactionManager().GetFactionByKey(realManager.m_Dummyfaction));
 			}
 			GameOverWin();
@@ -283,6 +285,24 @@ class NO_SCR_EditorTask : SCR_EditorTask
 		
 	}
 	
+	protected void DoMessageLocal(string message)
+	{
+		ShowPopUpNotification(message);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	// show notification every where
+	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
+	protected void RpcDoMessage(string message)
+	{
+		DoMessageLocal(message);
+	}
+	
+	void MakePopUpEveryWhere(string message)
+	{
+		Rpc(RpcDoMessage, message);
+		ShowPopUpNotification(message);
+	}
 	
 	bool IsBadTask(bool m_allowFailedTasks)
 	{
