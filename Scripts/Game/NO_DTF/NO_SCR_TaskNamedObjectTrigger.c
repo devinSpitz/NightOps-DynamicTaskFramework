@@ -116,6 +116,9 @@ class NO_SCR_TaskNamedObjectTriggerComponent : ScriptComponent
 		if(alreadyTriggered && m_bOneTimeTrigger) return;
 		if(!m_pRplComponent.IsMaster()) return;
 		
+		NO_SCR_TaskManager taskManager = NO_SCR_TaskManager.Cast(GetTaskManager());
+		if (taskManager && ParentTask && taskManager.m_Dummyfaction == ParentTask.GetTargetFaction().GetFactionKey()) return;
+		
 		if(m_eWhenTypeTrigger == WhenTypeTriggerNamed.Appear)
 		{
 			if(!InTrigger)

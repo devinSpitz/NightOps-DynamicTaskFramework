@@ -107,7 +107,8 @@ class NO_SCR_MultiTaskTriggerComponent : ScriptComponent
 		if(!m_pRplComponent.IsMaster()) return;
 		
 
-		
+		NO_SCR_TaskManager taskManager = NO_SCR_TaskManager.Cast(GetTaskManager());
+		if (taskManager && OwnTask && taskManager.m_Dummyfaction == OwnTask.GetTargetFaction().GetFactionKey()) return;
 		
 		foreach(string task : m_sTaskNames)
 		{
