@@ -129,9 +129,6 @@ class NO_SCR_TaskTrigger : SCR_BaseTriggerEntity
 		ArmaReforgerScripted game = GetGame();
 		if(!game) return;
 		
-		NO_SCR_TaskManager taskManager = NO_SCR_TaskManager.Cast(GetTaskManager());
-		if (taskManager && ParentTask && taskManager.m_Dummyfaction == ParentTask.GetTargetFaction().GetFactionKey()) return;
-		
 		PlayerManager playerManager = game.GetPlayerManager();
 		array<int> players = {};
 		playerManager.GetAllPlayers(players);
