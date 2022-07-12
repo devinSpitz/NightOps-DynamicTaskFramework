@@ -22,6 +22,8 @@ class NO_SCR_MultiTaskTriggerComponent : ScriptComponent
 	[Attribute("0", UIWidgets.CheckBox, "Not only allow completed task to trigger but also failed", category: "TaskManager:")]
 	bool m_allowFailedTasks;	
 	
+	[Attribute("1", UIWidgets.CheckBox, "Should the trigger only work one time?", category: "TaskManager:" )]
+	bool m_bOneTimeTrigger;
 	
 	private RplComponent m_pRplComponent;
 	private IEntity Owner;
@@ -101,7 +103,7 @@ class NO_SCR_MultiTaskTriggerComponent : ScriptComponent
 	//return as soon as its not valide anymore
 	void Do()
 	{
-		if(alreadyTriggered) return;
+		if(alreadyTriggered && m_bOneTimeTrigger) return;
 		if(!m_pRplComponent.IsMaster()) return;
 		
 

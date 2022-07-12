@@ -169,7 +169,7 @@ class NO_SCR_TaskNamedObjectTriggerComponent : ScriptComponent
 	
 	void Reset()
 	{
-		if(InTrigger && !m_bOneTimeTrigger)
+		if(!m_bOneTimeTrigger)
 		{
 			wasAlive = false;
 			InTrigger = null;
