@@ -126,6 +126,8 @@ class NO_SCR_TaskTrigger : SCR_BaseTriggerEntity
 		if(m_eActivateType == ActivateType.Leave && enter) return;
 		
 		
+		if(m_tTriggerType==ParentTask.TaskState) return;
+		
 		ArmaReforgerScripted game = GetGame();
 		if(!game) return;
 		
